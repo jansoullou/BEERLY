@@ -33,6 +33,7 @@ class MainPageViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(
             BeerCollectionViewCell.self,
             forCellWithReuseIdentifier: BeerCollectionViewCell.reuseIdentifier
@@ -129,4 +130,11 @@ extension MainPageViewController: UICollectionViewDataSource {
     }
 }
 
+extension MainPageViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tapped")
+        let beerInfoVC = BeerInfoPageConfigurator.build(beer: beerList[indexPath.row])
+        present(beerInfoVC, animated: true)
+    }
+}
 
