@@ -20,6 +20,13 @@
 		28E8ECE22A5BCD2B009AF1DF /* BeerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECE12A5BCD2B009AF1DF /* BeerCollectionViewCell.swift */; };
 		28E8ECE52A5BCD91009AF1DF /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECE42A5BCD91009AF1DF /* NetworkLayer.swift */; };
 		28E8ECE82A5BCE96009AF1DF /* CodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECE72A5BCE96009AF1DF /* CodeHelper.swift */; };
+		28E8ECEC2A5BD2C5009AF1DF /* BeerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECEB2A5BD2C5009AF1DF /* BeerInfoViewController.swift */; };
+		28E8ECEE2A5BD2DB009AF1DF /* BeerInfoPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECED2A5BD2DB009AF1DF /* BeerInfoPresentor.swift */; };
+		28E8ECF02A5BD2E6009AF1DF /* BeerInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECEF2A5BD2E6009AF1DF /* BeerInfoConfigurator.swift */; };
+		28E8ECF22A5BD2F2009AF1DF /* BeerInfoProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF12A5BD2F2009AF1DF /* BeerInfoProtocols.swift */; };
+		28E8ECF42A5BD3B8009AF1DF /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF32A5BD3B8009AF1DF /* RealmService.swift */; };
+		28E8ECF72A5BD439009AF1DF /* AddToBasketButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */; };
+		28E8ECFA2A5BD486009AF1DF /* BeerElementRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */; };
 		93AC84BB462F5217C70427B4 /* Pods_BEERLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +46,13 @@
 		28E8ECE12A5BCD2B009AF1DF /* BeerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCollectionViewCell.swift; sourceTree = "<group>"; };
 		28E8ECE42A5BCD91009AF1DF /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		28E8ECE72A5BCE96009AF1DF /* CodeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeHelper.swift; sourceTree = "<group>"; };
+		28E8ECEB2A5BD2C5009AF1DF /* BeerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerInfoViewController.swift; sourceTree = "<group>"; };
+		28E8ECED2A5BD2DB009AF1DF /* BeerInfoPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerInfoPresentor.swift; sourceTree = "<group>"; };
+		28E8ECEF2A5BD2E6009AF1DF /* BeerInfoConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerInfoConfigurator.swift; sourceTree = "<group>"; };
+		28E8ECF12A5BD2F2009AF1DF /* BeerInfoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerInfoProtocols.swift; sourceTree = "<group>"; };
+		28E8ECF32A5BD3B8009AF1DF /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBasketButton.swift; sourceTree = "<group>"; };
+		28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerElementRealmDTO.swift; sourceTree = "<group>"; };
 		431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BEERLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F00775E6EC7A8C9A5FB500 /* Pods-BEERLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.release.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.release.xcconfig"; sourceTree = "<group>"; };
 		FFD77E2A029C14DCAF428DEA /* Pods-BEERLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.debug.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				28E8ECDD2A5BCCD7009AF1DF /* BeerElementDTO.swift */,
+				28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,7 +145,8 @@
 		28E8ECE02A5BCD17009AF1DF /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				28E8ECE12A5BCD2B009AF1DF /* BeerCollectionViewCell.swift */,
+				28E8ECF82A5BD444009AF1DF /* CustomCells */,
+				28E8ECF52A5BD427009AF1DF /* CustomButtons */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -139,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				28E8ECE42A5BCD91009AF1DF /* NetworkLayer.swift */,
+				28E8ECF32A5BD3B8009AF1DF /* RealmService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -154,9 +171,37 @@
 		28E8ECE92A5BCEFC009AF1DF /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				28E8ECEA2A5BD2A9009AF1DF /* BeerInfoPage */,
 				28E8ECD42A5BCBFB009AF1DF /* MainPage */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		28E8ECEA2A5BD2A9009AF1DF /* BeerInfoPage */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ECEB2A5BD2C5009AF1DF /* BeerInfoViewController.swift */,
+				28E8ECED2A5BD2DB009AF1DF /* BeerInfoPresentor.swift */,
+				28E8ECEF2A5BD2E6009AF1DF /* BeerInfoConfigurator.swift */,
+				28E8ECF12A5BD2F2009AF1DF /* BeerInfoProtocols.swift */,
+			);
+			path = BeerInfoPage;
+			sourceTree = "<group>";
+		};
+		28E8ECF52A5BD427009AF1DF /* CustomButtons */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */,
+			);
+			path = CustomButtons;
+			sourceTree = "<group>";
+		};
+		28E8ECF82A5BD444009AF1DF /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ECE12A5BCD2B009AF1DF /* BeerCollectionViewCell.swift */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		362D8E0C69D0E7E00B2087CC /* Frameworks */ = {
@@ -290,7 +335,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E8ECEC2A5BD2C5009AF1DF /* BeerInfoViewController.swift in Sources */,
+				28E8ECF22A5BD2F2009AF1DF /* BeerInfoProtocols.swift in Sources */,
 				28E8ECD82A5BCC2A009AF1DF /* MainPagePresentor.swift in Sources */,
+				28E8ECF02A5BD2E6009AF1DF /* BeerInfoConfigurator.swift in Sources */,
+				28E8ECEE2A5BD2DB009AF1DF /* BeerInfoPresentor.swift in Sources */,
 				28E8ECD62A5BCC13009AF1DF /* MainPageViewController.swift in Sources */,
 				28E8ECE22A5BCD2B009AF1DF /* BeerCollectionViewCell.swift in Sources */,
 				28E8ECDC2A5BCC5A009AF1DF /* MainPageConfigurator.swift in Sources */,
@@ -299,8 +348,11 @@
 				28E8ECBF2A5BC6BD009AF1DF /* SceneDelegate.swift in Sources */,
 				28E8ECDE2A5BCCD7009AF1DF /* BeerElementDTO.swift in Sources */,
 				28E8ECE52A5BCD91009AF1DF /* NetworkLayer.swift in Sources */,
+				28E8ECF72A5BD439009AF1DF /* AddToBasketButton.swift in Sources */,
+				28E8ECFA2A5BD486009AF1DF /* BeerElementRealmDTO.swift in Sources */,
 				28E8ECE82A5BCE96009AF1DF /* CodeHelper.swift in Sources */,
 				28E8ECDA2A5BCC36009AF1DF /* MainPageProtocols.swift in Sources */,
+				28E8ECF42A5BD3B8009AF1DF /* RealmService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
