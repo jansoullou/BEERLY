@@ -28,6 +28,24 @@ extension RealmService: RealmServiceProtocol {
     }
 }
 
+extension RealmService: CartRealmServiceProtocol {
+    func deleteObject(object: Object) throws {
+        storage.writeAsync {
+            self.storage.delete(object)
+        }
+    }
+    
+    func deleteAll() throws {
+        storage.writeAsync {
+            self.storage.deleteAll()
+        }
+    }
+
+    func fetch<T: Object>(by type: T.Type) -> [T] {
+        return storage.objects(T.self).toArray()
+    }
+}
+
 extension Results {
     func toArray() -> [Element] {
         .init(self)

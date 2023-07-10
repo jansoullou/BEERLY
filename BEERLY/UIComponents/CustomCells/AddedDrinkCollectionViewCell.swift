@@ -1,5 +1,5 @@
 //
-//  BeerCollectionViewCell.swift
+//  AddedDrinkCollectionViewCell.swift
 //  BEERLY
 //
 //  Created by Zhansuluu Kydyrova on 10/7/23.
@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class BeerCollectionViewCell: UICollectionViewCell {
+class AddedDrinkCollectionViewCell: UICollectionViewCell {
     
-    static var reuseIdentifier = String(describing: BeerCollectionViewCell.self)
+    static var reuseIdentifier = String(describing: AddedDrinkCollectionViewCell.self)
     
     var drink: BeerElement?
     
@@ -27,15 +27,15 @@ class BeerCollectionViewCell: UICollectionViewCell {
     
     private lazy var borderLineView: UIView = {
         var view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .gray
         return view
     }()
     
     private lazy var productLabel: UILabel = {
         var label = UILabel()
-        label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .left
+        label.textColor = .darkGray
         label.font = UIFont(name: "Avenir Next Bold", size: 15)
         return label
     }()
@@ -43,21 +43,8 @@ class BeerCollectionViewCell: UICollectionViewCell {
     private lazy var taglineLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont(name: "Avenir Next", size: 11)
-        label.textColor = .black
+        label.textColor = .gray
         label.numberOfLines = 0
-        label.textAlignment = .left
-        return label
-    }()
-    
-    private lazy var descriptionLabel: UILabel = {
-        var label = UILabel()
-        label.font = UIFont(name: "Avenir Next", size: 11)
-        label.textColor = UIColor(cgColor: CGColor(
-            red: 111/265,
-            green: 64/265,
-            blue: 181/265,
-            alpha: 0.85))
-        label.numberOfLines = 12
         label.textAlignment = .left
         return label
     }()
@@ -72,7 +59,8 @@ class BeerCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension BeerCollectionViewCell {
+extension AddedDrinkCollectionViewCell {
+    
     private func setUpUI() {
         setUpSubviews()
         setUpConstraints()
@@ -83,7 +71,6 @@ extension BeerCollectionViewCell {
         addSubview(productLabel)
         addSubview(borderLineView)
         addSubview(taglineLabel)
-        addSubview(descriptionLabel)
     }
     
     private func setUpConstraints() {
@@ -111,18 +98,13 @@ extension BeerCollectionViewCell {
             maker.top.equalTo(borderLineView.snp.bottom).offset(10)
             maker.left.right.equalTo(productLabel)
         }
-        
-        descriptionLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(taglineLabel.snp.bottom).offset(10)
-            maker.left.right.equalTo(productLabel)
-        }
     }
     
     func displayInfo(product: BeerElement) {
         drink = product
+        print(product)
         productLabel.text = product.name?.uppercased()
         taglineLabel.text = product.tagline?.uppercased()
-        descriptionLabel.text = product.description?.uppercased()
         productImage.kf.setImage(with: URL(string: product.imageURL ?? ""))
     }
 }

@@ -16,13 +16,13 @@ class CustomTabBarController: UITabBarController {
         
         private func setupVC() {
             viewControllers = [
-                createControllers(for: MainPageConfigurator.build(), title: "", image: UIImage(systemName: "house.circle")!),
+                createControllers(for: MainPageConfigurator.build(), image: UIImage(systemName: "house.circle")!),
+                createControllers(for: CartConfigurator.build(), image: UIImage(systemName: "basket.fill")!)
             ]
         }
         
         private func createControllers(
             for rootViewController: UIViewController,
-            title: String,
             image: UIImage
         ) -> UIViewController {
             let navVC = UINavigationController(rootViewController: rootViewController)

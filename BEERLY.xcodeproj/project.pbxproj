@@ -28,6 +28,11 @@
 		28E8ECF72A5BD439009AF1DF /* AddToBasketButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */; };
 		28E8ECFA2A5BD486009AF1DF /* BeerElementRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */; };
 		28E8ECFD2A5BD895009AF1DF /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECFC2A5BD895009AF1DF /* CustomTabBar.swift */; };
+		28E8ED002A5BD9BD009AF1DF /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECFF2A5BD9BD009AF1DF /* CartViewController.swift */; };
+		28E8ED022A5BD9C7009AF1DF /* CartConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED012A5BD9C7009AF1DF /* CartConfigurator.swift */; };
+		28E8ED042A5BD9D1009AF1DF /* CartPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED032A5BD9D1009AF1DF /* CartPresentor.swift */; };
+		28E8ED062A5BD9E1009AF1DF /* CartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED052A5BD9E1009AF1DF /* CartProtocols.swift */; };
+		28E8ED082A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED072A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift */; };
 		93AC84BB462F5217C70427B4 /* Pods_BEERLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +60,11 @@
 		28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBasketButton.swift; sourceTree = "<group>"; };
 		28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerElementRealmDTO.swift; sourceTree = "<group>"; };
 		28E8ECFC2A5BD895009AF1DF /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		28E8ECFF2A5BD9BD009AF1DF /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		28E8ED012A5BD9C7009AF1DF /* CartConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartConfigurator.swift; sourceTree = "<group>"; };
+		28E8ED032A5BD9D1009AF1DF /* CartPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresentor.swift; sourceTree = "<group>"; };
+		28E8ED052A5BD9E1009AF1DF /* CartProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProtocols.swift; sourceTree = "<group>"; };
+		28E8ED072A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedDrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BEERLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F00775E6EC7A8C9A5FB500 /* Pods-BEERLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.release.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.release.xcconfig"; sourceTree = "<group>"; };
 		FFD77E2A029C14DCAF428DEA /* Pods-BEERLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.debug.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,10 +137,10 @@
 		28E8ECD42A5BCBFB009AF1DF /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				28E8ECD52A5BCC13009AF1DF /* MainPageViewController.swift */,
+				28E8ECDB2A5BCC5A009AF1DF /* MainPageConfigurator.swift */,
 				28E8ECD72A5BCC2A009AF1DF /* MainPagePresentor.swift */,
 				28E8ECD92A5BCC36009AF1DF /* MainPageProtocols.swift */,
-				28E8ECDB2A5BCC5A009AF1DF /* MainPageConfigurator.swift */,
+				28E8ECD52A5BCC13009AF1DF /* MainPageViewController.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -147,9 +157,9 @@
 		28E8ECE02A5BCD17009AF1DF /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				28E8ECFB2A5BD885009AF1DF /* CustomTabBar */,
-				28E8ECF82A5BD444009AF1DF /* CustomCells */,
 				28E8ECF52A5BD427009AF1DF /* CustomButtons */,
+				28E8ECF82A5BD444009AF1DF /* CustomCells */,
+				28E8ECFB2A5BD885009AF1DF /* CustomTabBar */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -174,6 +184,7 @@
 		28E8ECE92A5BCEFC009AF1DF /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				28E8ECFE2A5BD9AC009AF1DF /* CartPage */,
 				28E8ECEA2A5BD2A9009AF1DF /* BeerInfoPage */,
 				28E8ECD42A5BCBFB009AF1DF /* MainPage */,
 			);
@@ -183,10 +194,10 @@
 		28E8ECEA2A5BD2A9009AF1DF /* BeerInfoPage */ = {
 			isa = PBXGroup;
 			children = (
-				28E8ECEB2A5BD2C5009AF1DF /* BeerInfoViewController.swift */,
-				28E8ECED2A5BD2DB009AF1DF /* BeerInfoPresentor.swift */,
 				28E8ECEF2A5BD2E6009AF1DF /* BeerInfoConfigurator.swift */,
+				28E8ECED2A5BD2DB009AF1DF /* BeerInfoPresentor.swift */,
 				28E8ECF12A5BD2F2009AF1DF /* BeerInfoProtocols.swift */,
+				28E8ECEB2A5BD2C5009AF1DF /* BeerInfoViewController.swift */,
 			);
 			path = BeerInfoPage;
 			sourceTree = "<group>";
@@ -202,6 +213,7 @@
 		28E8ECF82A5BD444009AF1DF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				28E8ED072A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift */,
 				28E8ECE12A5BCD2B009AF1DF /* BeerCollectionViewCell.swift */,
 			);
 			path = CustomCells;
@@ -213,6 +225,17 @@
 				28E8ECFC2A5BD895009AF1DF /* CustomTabBar.swift */,
 			);
 			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		28E8ECFE2A5BD9AC009AF1DF /* CartPage */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ED012A5BD9C7009AF1DF /* CartConfigurator.swift */,
+				28E8ED032A5BD9D1009AF1DF /* CartPresentor.swift */,
+				28E8ED052A5BD9E1009AF1DF /* CartProtocols.swift */,
+				28E8ECFF2A5BD9BD009AF1DF /* CartViewController.swift */,
+			);
+			path = CartPage;
 			sourceTree = "<group>";
 		};
 		362D8E0C69D0E7E00B2087CC /* Frameworks */ = {
@@ -351,16 +374,21 @@
 				28E8ECFD2A5BD895009AF1DF /* CustomTabBar.swift in Sources */,
 				28E8ECD82A5BCC2A009AF1DF /* MainPagePresentor.swift in Sources */,
 				28E8ECF02A5BD2E6009AF1DF /* BeerInfoConfigurator.swift in Sources */,
+				28E8ED062A5BD9E1009AF1DF /* CartProtocols.swift in Sources */,
 				28E8ECEE2A5BD2DB009AF1DF /* BeerInfoPresentor.swift in Sources */,
+				28E8ED082A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift in Sources */,
 				28E8ECD62A5BCC13009AF1DF /* MainPageViewController.swift in Sources */,
 				28E8ECE22A5BCD2B009AF1DF /* BeerCollectionViewCell.swift in Sources */,
 				28E8ECDC2A5BCC5A009AF1DF /* MainPageConfigurator.swift in Sources */,
 				28E8ECD12A5BC8EB009AF1DF /* AppCoordinator.swift in Sources */,
 				28E8ECBD2A5BC6BD009AF1DF /* AppDelegate.swift in Sources */,
 				28E8ECBF2A5BC6BD009AF1DF /* SceneDelegate.swift in Sources */,
+				28E8ED002A5BD9BD009AF1DF /* CartViewController.swift in Sources */,
 				28E8ECDE2A5BCCD7009AF1DF /* BeerElementDTO.swift in Sources */,
+				28E8ED042A5BD9D1009AF1DF /* CartPresentor.swift in Sources */,
 				28E8ECE52A5BCD91009AF1DF /* NetworkLayer.swift in Sources */,
 				28E8ECF72A5BD439009AF1DF /* AddToBasketButton.swift in Sources */,
+				28E8ED022A5BD9C7009AF1DF /* CartConfigurator.swift in Sources */,
 				28E8ECFA2A5BD486009AF1DF /* BeerElementRealmDTO.swift in Sources */,
 				28E8ECE82A5BCE96009AF1DF /* CodeHelper.swift in Sources */,
 				28E8ECDA2A5BCC36009AF1DF /* MainPageProtocols.swift in Sources */,
