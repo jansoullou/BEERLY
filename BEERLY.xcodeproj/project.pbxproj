@@ -27,6 +27,7 @@
 		28E8ECF42A5BD3B8009AF1DF /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF32A5BD3B8009AF1DF /* RealmService.swift */; };
 		28E8ECF72A5BD439009AF1DF /* AddToBasketButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */; };
 		28E8ECFA2A5BD486009AF1DF /* BeerElementRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */; };
+		28E8ECFD2A5BD895009AF1DF /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ECFC2A5BD895009AF1DF /* CustomTabBar.swift */; };
 		93AC84BB462F5217C70427B4 /* Pods_BEERLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		28E8ECF32A5BD3B8009AF1DF /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		28E8ECF62A5BD439009AF1DF /* AddToBasketButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBasketButton.swift; sourceTree = "<group>"; };
 		28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerElementRealmDTO.swift; sourceTree = "<group>"; };
+		28E8ECFC2A5BD895009AF1DF /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BEERLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F00775E6EC7A8C9A5FB500 /* Pods-BEERLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.release.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.release.xcconfig"; sourceTree = "<group>"; };
 		FFD77E2A029C14DCAF428DEA /* Pods-BEERLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.debug.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		28E8ECE02A5BCD17009AF1DF /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				28E8ECFB2A5BD885009AF1DF /* CustomTabBar */,
 				28E8ECF82A5BD444009AF1DF /* CustomCells */,
 				28E8ECF52A5BD427009AF1DF /* CustomButtons */,
 			);
@@ -202,6 +205,14 @@
 				28E8ECE12A5BCD2B009AF1DF /* BeerCollectionViewCell.swift */,
 			);
 			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		28E8ECFB2A5BD885009AF1DF /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ECFC2A5BD895009AF1DF /* CustomTabBar.swift */,
+			);
+			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
 		362D8E0C69D0E7E00B2087CC /* Frameworks */ = {
@@ -337,6 +348,7 @@
 			files = (
 				28E8ECEC2A5BD2C5009AF1DF /* BeerInfoViewController.swift in Sources */,
 				28E8ECF22A5BD2F2009AF1DF /* BeerInfoProtocols.swift in Sources */,
+				28E8ECFD2A5BD895009AF1DF /* CustomTabBar.swift in Sources */,
 				28E8ECD82A5BCC2A009AF1DF /* MainPagePresentor.swift in Sources */,
 				28E8ECF02A5BD2E6009AF1DF /* BeerInfoConfigurator.swift in Sources */,
 				28E8ECEE2A5BD2DB009AF1DF /* BeerInfoPresentor.swift in Sources */,

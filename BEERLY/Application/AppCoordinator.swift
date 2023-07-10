@@ -20,6 +20,6 @@ final class AppCoordinator {
     }
     
     private func openRootViewController() {
-        window?.rootViewController = MainPageConfigurator.build()
+        window?.rootViewController = CustomTabBarController()
     }
 }

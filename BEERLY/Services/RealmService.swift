@@ -25,7 +25,6 @@ extension RealmService: RealmServiceProtocol {
         storage.writeAsync {
             self.storage.add(object)
         }
-        try storage.commitWrite()
     }
 }
 
