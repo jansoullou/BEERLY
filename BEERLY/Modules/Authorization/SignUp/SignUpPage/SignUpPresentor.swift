@@ -13,13 +13,13 @@ class SignUpPresentor {
 }
 
 extension SignUpPresentor: SignUpPresentorDelegate {
-    func signUp(user: User) {
-        fireBaseManager?.signUp(user: user) { [weak self] result in
+    func signUp(user: User, additionalInfo: UserAdditionalInfo) {
+        fireBaseManager?.signUp(user: user, additionalInfo: additionalInfo) { [weak self] result in
             switch result {
-            case true:
-                self?.vcDelegate?.signUp(isRegistered: true)
-            case false:
-                self?.vcDelegate?.signUp(isRegistered: false)
+            case .success(_):
+                self?.vcDelegate?.getResult()
+            case .failure(let failure):
+                self?.vcDelegate?.getError(error: failure)
             }
         }
     }

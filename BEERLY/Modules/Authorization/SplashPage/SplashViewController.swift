@@ -20,16 +20,16 @@ class SplashViewController: UIViewController {
         label.layer.shadowOpacity = 0.2
         return label
     }()
-
+    
     private lazy var signInButton: UIButton = {
         var button = UIButton()
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
         button.setTitle("Sign in", for: .normal)
-        button.backgroundColor = UIColor(cgColor: CGColor(
-                                             red: 253/265,
-                                           green: 185/265,
-                                            blue: 150/265,
-                                           alpha: 1))
+        button.backgroundColor = UIColor(
+                                 red: 0.88,
+                                 green: 0.868,
+                                 blue: 0.962,
+                                 alpha: 0.7)
         button.setTitleColor(.white, for: .normal)
         button.layer.shadowOffset = CGSize(width: 0.0, height: 5)
         button.layer.shadowOpacity = 0.2
@@ -52,18 +52,22 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(cgColor: CGColor(
-                                           red: 250/265,
-                                         green: 120/265,
-                                          blue: 91/265,
-                                         alpha: 1))
-
+        navigationController?.navigationBar.tintColor = .gray
+    }
+    
+    override func loadView() {
+        super.loadView()
         setUpUI()
     }
     
     private func setUpUI() {
         setUpSubviews()
         setUpConstraints()
+        view.backgroundColor = UIColor(
+                               red: 235/265,
+                               green: 235/265,
+                               blue: 235/265,
+                               alpha: 1)
     }
     
     private func setUpSubviews() {
@@ -97,16 +101,13 @@ class SplashViewController: UIViewController {
     
     @objc
     private func signUpTapped() {
-        let registrationViewController = AuthenticationViewController()
+        let registrationViewController = EnterNumViewController()
         navigationController?.pushViewController(registrationViewController, animated: true)
     }
     
     @objc
     private func signInTapped() {
-        let authorizationViewController = AuthorizationViewController()
+        let authorizationViewController = SignInConfigurator.build()
         navigationController?.pushViewController(authorizationViewController, animated: true)
     }
-    
 }
-
-

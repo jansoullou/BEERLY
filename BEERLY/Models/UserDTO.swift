@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+struct User {
+    var email: String
+    var password: String
+    var uid: String
+}
+
+struct UserAdditionalInfo {
+    var name: String
+    var address: String
+    var phoneNum: String
+}
+

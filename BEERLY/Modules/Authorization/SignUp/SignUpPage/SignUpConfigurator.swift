@@ -10,7 +10,7 @@ import UIKit
 class SignUpConfigurator {
     static func build(phoneNum: String) -> UIViewController {
         let vc = SignUpViewController(phoneNumber: phoneNum)
-        let service = FirebaseAuthService.shared
+        let service = FirebaseService.shared
         let presentor = SignUpPresentor()
         
         vc.presentor = presentor

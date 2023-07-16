@@ -8,47 +8,31 @@
 import Foundation
 import Firebase
 import FirebaseAuth
-import FirebaseDatabase
+import FirebaseFirestore
 
 class FirebaseService {
     
     static let shared = FirebaseService()
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let db = Firestore.firestore()
     
     private init() { }
     
-    private let authManager = Auth.auth()
-    private var verificationId: String?
-}
-
-extension FirebaseService: EnterNumServiceProtocol {
-    func startAuth(phoneNum: String, completion: @escaping(Result<Bool, Error>)-> Void) {
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNum, uiDelegate: nil) { [weak self] verificationID, error in
-            guard let verificationID = verificationID, error == nil else {
+    func fetchUsersAddInfo(uid: String, completion: @escaping (Result<UserAdditionalInfo, Error>) -> Void) {
+        let docRef = db.collection("users").document(uid)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let data = document.data() {
+                    let name = data["name"] as? String ?? ""
+                    let adress = data["address"] as? String ?? ""
+                    let phoneNum = data["phone"] as? String ?? ""
+                    let userInfo = UserAdditionalInfo(name: name, address: adress, phoneNum: phoneNum)
+                    completion(.success(userInfo))
+                }
+            } else {
                 completion(.failure(error!))
-                return
             }
-            self?.verificationId = verificationID
-            completion(.success(true))
-        }
-    }
-}
-
-extension FirebaseService: VerifyNumServiceProtocol {
-    func verifyCode(code: String, completion: @escaping(Result<Bool, Error>)-> Void) {
-        guard let verificationId = verificationId else {
-            return
-        }
-        
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId, verificationCode: code)
-        
-        authManager.signIn(with: credential) { result, error in
-            guard result != nil, error == nil else {
-                completion(.failure(error!))
-                return
-            }
-            completion(.success(true))
         }
     }
 }
@@ -61,12 +45,7 @@ extension FirebaseService: SignUpServiceProtocol {
                 return
             }
             
-            if let currentUser = Auth.auth().currentUser {
-                let uid = currentUser.uid
-                self?.appDelegate.currentUser = User(email: currentUser.email ?? "", password: "error", uid: currentUser.uid)
-            }
-            
-            print(self?.appDelegate.currentUser)
+            completion(.success(true))
             
             let userData = [
                 "name": additionalInfo.name,
@@ -74,13 +53,20 @@ extension FirebaseService: SignUpServiceProtocol {
                 "phone": additionalInfo.phoneNum
             ]
             
-            let ref = Database.database().reference().child("users").child(result.user.uid)
-            ref.setValue(userData) { error, result in
+            self?.db.collection("users").document(result.user.uid).setData(userData) { error in
                 if let error = error {
-                    print("Error saving user data: \(error.localizedDescription)")
                     completion(.failure(error))
-                } else {
-                    completion(.success(true))
+                }
+            }
+            
+            self?.appDelegate.currentUser = User(email: result.user.email ?? "", password: "error", uid: result.user.uid)
+            
+            self?.fetchUsersAddInfo(uid: result.user.uid) { result in
+                switch result {
+                case .success(let success):
+                    self?.appDelegate.userAddInfo = success
+                case .failure(let error):
+                    completion(.failure(error))
                 }
             }
         }
@@ -94,10 +80,17 @@ extension FirebaseService: SignInServiceProtocol {
                 completion(.failure(error!))
                 return
             }
-            print("num: \(result.user.phoneNumber)")
-            print("PROVIDER: \(result.credential?.provider)")
             self?.appDelegate.currentUser = User(email: result.user.email!, password: "error", uid: result.user.uid)
             completion(.success(true))
+            
+            self?.fetchUsersAddInfo(uid: result.user.uid) { result in
+                switch result {
+                case .success(let success):
+                    self?.appDelegate.userAddInfo = success
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
         }
     }
 }
@@ -111,41 +104,17 @@ extension FirebaseService: ProfileServiceProtocol {
             print(error.localizedDescription)
         }
     }
-    
-    func fetchUserData(uid: String, completion: @escaping (Result<UserAdditionalInfo, Error>) -> Void) {
-        let ref = Database.database().reference().child("users").child(uid)
-        ref.observeSingleEvent(of: .value, with: { snapshot in
-            if let userDataDict = snapshot.value as? [String: Any],
-               let name = userDataDict["name"] as? String,
-               let address = userDataDict["address"] as? String,
-               let phoneNum = userDataDict["phone"] as? String
-            {
-                let userData = UserAdditionalInfo(name: name, address: address, phoneNum: phoneNum)
-                completion(.success(userData))
-            }
-        }) { error in
-            completion(.failure(error))
-            print(error.localizedDescription)
-        }
-    }
 }
 
 extension FirebaseService: EditProfileServiceProtocol {
     func updateData(uid: String, name: String, adress: String) {
-        guard let currentUser = Auth.auth().currentUser else {
-            return
-        }
+        let documentRef = db.collection("users").document(uid)
         
         let userData = [
             "name": name,
             "address": adress
         ]
         
-        let ref = Database.database().reference().child("users").child(currentUser.uid)
-        ref.updateChildValues(userData) { error, _ in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
+        documentRef.updateData(userData)
     }
 }

@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 class SignUpViewController: UIViewController {
-    
     var presentor: SignUpPresentorDelegate?
     
     private var phoneNumber: String?
@@ -90,8 +89,17 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
+    private lazy var errorMessage: UILabel = {
+        var label = UILabel()
+        label.textColor = .red
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(phoneNumber)
     }
     
     override func loadView() {
@@ -117,6 +125,7 @@ class SignUpViewController: UIViewController {
         view.addSubview(nameTextField)
         view.addSubview(adressTextField)
         view.addSubview(signUpButton)
+        view.addSubview(errorMessage)
     }
     
     private func setUpConstraints() {
@@ -168,6 +177,12 @@ class SignUpViewController: UIViewController {
             maker.right.equalToSuperview().offset(-40)
             maker.height.equalTo(60)
         }
+        
+        errorMessage.snp.makeConstraints { maker in
+            maker.top.equalTo(signUpButton.snp.bottom).offset(30)
+            maker.left.equalToSuperview().offset(40)
+            maker.right.equalToSuperview().offset(-40)
+        }
     }
     
     @objc
@@ -185,9 +200,10 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        let user = User(email: emailTextField.text!, password: passwordTextField.text!, name: nameTextField.text!, address: adressTextField.text!, phoneNum: phoneNumber!)
+        let user = User(email: emailTextField.text!, password: passwordTextField.text!, uid: "")
+        let addInfo = UserAdditionalInfo(name: nameTextField.text!, address: adressTextField.text!, phoneNum:  phoneNumber!)
         print(user)
-        presentor?.signUp(user: user)
+        presentor?.signUp(user: user, additionalInfo: addInfo)
     }
     
     private func wrongData() {
@@ -226,13 +242,17 @@ class SignUpViewController: UIViewController {
 }
 
 extension SignUpViewController: SignUpVCDelegate {
-    func signUp(isRegistered: Bool) {
-        if isRegistered {
-            let mainVC = CustomTabBarController()
-            mainVC.modalPresentationStyle = .overFullScreen
-            present(mainVC, animated: true)
-        } else {
-            wrongData()
-        }
+    func getResult() {
+        errorMessage.text = ""
+        let mainVC = CustomTabBarController()
+        print("success")
+        mainVC.modalPresentationStyle = .overFullScreen
+        present(mainVC, animated: true)
+    }
+    
+    func getError(error: Error) {
+        wrongData()
+        print(error.localizedDescription)
+        errorMessage.text = error.localizedDescription
     }
 }

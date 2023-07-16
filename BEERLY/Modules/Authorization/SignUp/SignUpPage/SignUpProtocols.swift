@@ -8,14 +8,15 @@
 import Foundation
 
 protocol SignUpServiceProtocol: AnyObject {
-    func signUp(user: User, completion: @escaping(Bool) -> Void)
+    func signUp(user: User, additionalInfo: UserAdditionalInfo, completion: @escaping(Result<Bool, Error>) -> Void)
 }
 
 protocol SignUpVCDelegate: AnyObject {
-    func signUp(isRegistered: Bool)
+    func getResult()
+    func getError(error: Error)
 }
 
 protocol SignUpPresentorDelegate: AnyObject {
-    func signUp(user: User)
+    func signUp(user: User, additionalInfo: UserAdditionalInfo)
 }
 

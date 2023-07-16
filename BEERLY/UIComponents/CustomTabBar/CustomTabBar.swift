@@ -7,7 +7,6 @@
 import UIKit
 
 class CustomTabBarController: UITabBarController {
-    
         override func viewDidLoad() {
             super.viewDidLoad()
             tabBar.tintColor = .lightGray
@@ -17,7 +16,8 @@ class CustomTabBarController: UITabBarController {
         private func setupVC() {
             viewControllers = [
                 createControllers(for: MainPageConfigurator.build(), image: UIImage(systemName: "house.circle")!),
-                createControllers(for: CartConfigurator.build(), image: UIImage(systemName: "basket.fill")!)
+                createControllers(for: CartConfigurator.build(), image: UIImage(systemName: "basket.fill")!),
+                createControllers(for: ProfilePageConfigurator.build(), image: UIImage(systemName: "person.fill")!)
             ]
         }
         

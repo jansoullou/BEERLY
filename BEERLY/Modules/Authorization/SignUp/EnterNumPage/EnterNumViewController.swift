@@ -10,8 +10,6 @@ import SnapKit
 
 class EnterNumViewController: UIViewController {
     
-    var presentor: EnterNumPresentorDelegate?
-    
     private lazy var registrationLabel: UILabel = {
         var label = UILabel()
         label.text = "Enter your phone number"
@@ -33,7 +31,7 @@ class EnterNumViewController: UIViewController {
     private lazy var getTheCodeButton: UIButton = {
         var button = UIButton()
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
-        button.setTitle("Get the code", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = UIColor(
                                  red: 240/265,
                                  green: 240/265,
@@ -43,17 +41,25 @@ class EnterNumViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 0.0, height: 5)
         button.layer.shadowOpacity = 0.2
         button.layer.cornerRadius = 25
-        button.addTarget(self, action: #selector(sendVerificationCode), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToNextPage), for: .touchUpInside)
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private lazy var errorMessage: UILabel = {
+        var label = UILabel()
+        label.textColor = .red
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        return label
+    }()
     
     override func loadView() {
         super.loadView()
         setUpUI()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     private func setUpUI() {
@@ -70,6 +76,7 @@ class EnterNumViewController: UIViewController {
         view.addSubview(registrationLabel)
         view.addSubview(phoneNumberTextField)
         view.addSubview(getTheCodeButton)
+        view.addSubview(errorMessage)
     }
     
     private func setUpConstraints() {
@@ -93,15 +100,25 @@ class EnterNumViewController: UIViewController {
             maker.right.equalToSuperview().offset(-40)
             maker.height.equalTo(60)
         }
+        
+        errorMessage.snp.makeConstraints { maker in
+            maker.top.equalTo(getTheCodeButton).offset(80)
+            maker.left.equalToSuperview().offset(40)
+            maker.right.equalToSuperview().offset(-40)
+        }
     }
     
     @objc
-    private func sendVerificationCode() {
+    private func goToNextPage() {
         guard let phoneNumber = phoneNumberTextField.text, phoneNumber.count != 0 else {
             wrongNum()
             return
         }
-        presentor?.getVerifyCode(phoneNum: phoneNumber)
+        
+        let signUpVC = SignUpConfigurator.build(phoneNum: phoneNumberTextField.text!)
+        signUpVC.modalPresentationStyle = .fullScreen
+    
+        present(signUpVC, animated: true)
     }
     
     private func wrongNum() {
@@ -112,20 +129,5 @@ class EnterNumViewController: UIViewController {
             self?.phoneNumberTextField.placeholder = "Phone Number"
         }
     }
-    
-    private func rightNum() {
-        phoneNumberTextField.textColor = .green
-    }
 }
 
-extension EnterNumViewController: EnterNumVCDelegate {
-    func verifyCodeWasSent(wasCodeSent: Bool) {
-        if wasCodeSent {
-            rightNum()
-            let verificationVC = VerifyNumConfigurator.build(phoneNum: phoneNumberTextField.text!)
-            present(verificationVC, animated: true)
-        } else {
-            wrongNum()
-        }
-    }
-}

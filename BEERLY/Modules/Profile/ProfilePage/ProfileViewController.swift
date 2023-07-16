@@ -10,6 +10,10 @@ import SnapKit
 
 class ProfileViewController: UIViewController {
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    var profilePresentorDelegate: ProfilePresentorDelegate?
+    
     private lazy var containerView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(
@@ -29,12 +33,13 @@ class ProfileViewController: UIViewController {
         view.tintColor = .white
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 75
+        view.clipsToBounds = true
         return view
     }()
     
     private lazy var profileName: UILabel = {
         var label = UILabel()
-        label.text = "UsersName"
+        label.text = appDelegate.userAddInfo?.name
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -44,8 +49,8 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileNum: UILabel = {
         var label = UILabel()
-        label.text = "+00000000000"
         label.textColor = .white
+        label.text = appDelegate.userAddInfo?.phoneNum
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont(name: "Avenir Next Medium", size: 16)
@@ -54,8 +59,8 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileAdress: UILabel = {
         var label = UILabel()
-        label.text = "Tokombaeva 11/2 A, 4273"
         label.textColor = .white
+        label.text = appDelegate.userAddInfo?.address
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont(name: "Avenir Next Medium", size: 16)
@@ -64,18 +69,26 @@ class ProfileViewController: UIViewController {
     
     private lazy var editProfileButton: UIButton = {
         var button = UIButton()
-        button.setImage(UIImage(systemName: "pencil"), for: .normal)
+        button.setImage(UIImage(named: "editImageIcon"), for: .normal)
         button.tintColor = .darkGray
+        button.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private lazy var logOutButton: UIButton = {
+        var button = UIButton()
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
+        button.setImage(UIImage(named: "logOutIcon"), for: .normal)
+        button.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        return button
+    }()
     
     override func loadView() {
         super.loadView()
         setUpUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
     }
     
     private func setUpUI() {
@@ -91,6 +104,7 @@ class ProfileViewController: UIViewController {
         containerView.addSubview(profileNum)
         containerView.addSubview(profileAdress)
         containerView.addSubview(editProfileButton)
+        containerView.addSubview(logOutButton)
     }
     
     private func setUpConstraints() {
@@ -127,11 +141,39 @@ class ProfileViewController: UIViewController {
             maker.right.equalToSuperview().offset(-10)
             maker.width.height.equalTo(40)
         }
+        
+        logOutButton.snp.makeConstraints { maker in
+            maker.bottom.equalToSuperview().offset(-20)
+            maker.right.equalToSuperview().offset(-30)
+            maker.width.equalTo(30)
+            maker.height.equalTo(30)
+        }
     }
     
     @objc
-    func editProfile() {
-        print("tapped")
+    private func editProfile() {
+        let editProfileVC = EditProfilePageConfigurator.build(name: profileName.text!, adress: profileAdress.text!, usersImage: profileImageView.image!)
+        editProfileVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(editProfileVC, animated: true)
+    }
+    
+    @objc
+    private func signOut() {
+        profilePresentorDelegate?.logOut()
     }
 }
 
+extension ProfileViewController: ProfileVCDelegate {
+    func logOut(result: Bool) {
+        if result {
+            let splashVC = UINavigationController(rootViewController: SplashViewController())
+            splashVC.modalPresentationStyle = .overFullScreen
+            present(splashVC, animated: true)
+            self.appDelegate.currentUser = nil
+        }
+    }
+    
+    func getError(error: Error) {
+        print(error.localizedDescription)
+    }
+}

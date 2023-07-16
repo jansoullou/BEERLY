@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+protocol ProfileServiceProtocol: AnyObject {
+    func logOut(completion: @escaping (Bool) -> Void)
+}
+
+protocol ProfileVCDelegate: AnyObject {
+    func logOut(result: Bool)
+}
+
+protocol ProfilePresentorDelegate: AnyObject {
+    func logOut()
+}
