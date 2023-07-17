@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 class CartViewController: UIViewController {
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var presentorToVC: CartPresentorToVC?
     var presentorToService: CartPresentorToService?
     
@@ -41,10 +44,10 @@ class CartViewController: UIViewController {
     private lazy var orderButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor(
-            red: 0.88,
-            green: 0.868,
-            blue: 0.962,
-            alpha: 0.9)
+                                 red: 0.88,
+                                 green: 0.868,
+                                 blue: 0.962,
+                                 alpha: 0.9)
         button.layer.cornerRadius = 15
         button.layer.shadowOffset = .init(width: 5, height: 5)
         button.layer.shadowOpacity = 0.7
@@ -65,10 +68,10 @@ class CartViewController: UIViewController {
     private lazy var deleteAllButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor(
-            red: 240/265,
-            green: 240/265,
-            blue: 240/265,
-            alpha: 0.8)
+                                 red: 240/265,
+                                 green: 240/265,
+                                 blue: 240/265,
+                                 alpha: 0.8)
         button.layer.cornerRadius = 15
         button.layer.shadowOffset = .init(width: 5, height: 5)
         button.layer.shadowOpacity = 0.8
@@ -87,7 +90,15 @@ class CartViewController: UIViewController {
     }()
     
     private lazy var alert: UIAlertController = {
-        var alert = UIAlertController (title: "Your order is accepted", message: "Wait for the call. Your phone number: +996678865764", preferredStyle: .alert)
+        var alert = UIAlertController (title: "Your order is accepted", message: "Wait for the call. Your phone number: \(appDelegate.userAddInfo!.phoneNum)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        return alert
+    }()
+    
+    private lazy var emptyCartAlert: UIAlertController = {
+        var alert = UIAlertController (title: "The cart is empty", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         
@@ -106,6 +117,10 @@ class CartViewController: UIViewController {
     
     @objc
     func getOrderButton() {
+        guard !addedBeersList.isEmpty else {
+            present(emptyCartAlert, animated: true)
+            return
+        }
         present(alert, animated: true)
         do {
             try presentorToService?.deleteAll()
@@ -119,6 +134,10 @@ class CartViewController: UIViewController {
     
     @objc
     func deleteAll() {
+        guard !addedBeersList.isEmpty else {
+            present(emptyCartAlert, animated: true)
+            return
+        }
         do {
             try presentorToService?.deleteAll()
         } catch {
@@ -135,10 +154,10 @@ extension CartViewController {
         setUpSubviews()
         setUpConstraints()
         view.backgroundColor = UIColor(
-            red: 0.958,
-            green: 0.958,
-            blue: 0.958,
-            alpha: 1)
+                               red: 0.958,
+                               green: 0.958,
+                               blue: 0.958,
+                               alpha: 1)
     }
     
     private func setUpSubviews() {

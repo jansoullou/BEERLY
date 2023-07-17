@@ -33,6 +33,27 @@
 		28E8ED042A5BD9D1009AF1DF /* CartPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED032A5BD9D1009AF1DF /* CartPresentor.swift */; };
 		28E8ED062A5BD9E1009AF1DF /* CartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED052A5BD9E1009AF1DF /* CartProtocols.swift */; };
 		28E8ED082A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED072A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift */; };
+		28E8ED0B2A5BE9A6009AF1DF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED0A2A5BE9A6009AF1DF /* ProfileViewController.swift */; };
+		28E8ED0E2A5BE9C0009AF1DF /* ProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED0D2A5BE9C0009AF1DF /* ProfileProtocols.swift */; };
+		28E8ED102A5BE9CA009AF1DF /* ProfilePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED0F2A5BE9CA009AF1DF /* ProfilePresentor.swift */; };
+		28E8ED122A5BE9D8009AF1DF /* ProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED112A5BE9D8009AF1DF /* ProfileConfigurator.swift */; };
+		28E8ED162A5BECAF009AF1DF /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E8ED152A5BECAF009AF1DF /* EditProfileViewController.swift */; };
+		28E90EA72A6330E700D4894D /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E90EA62A6330E700D4894D /* SplashViewController.swift */; };
+		28E90EAC2A63339600D4894D /* SignInConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E90EAB2A63339600D4894D /* SignInConfigurator.swift */; };
+		28E90EAE2A6333A700D4894D /* SignInPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E90EAD2A6333A700D4894D /* SignInPresentor.swift */; };
+		28E90EB02A6333B000D4894D /* SignInProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E90EAF2A6333B000D4894D /* SignInProtocols.swift */; };
+		28E90EB22A6333BA00D4894D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E90EB12A6333BA00D4894D /* SignInViewController.swift */; };
+		28FA929B2A6093E4002D39BD /* EditProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA929A2A6093E4002D39BD /* EditProfileProtocols.swift */; };
+		28FA929D2A609400002D39BD /* EditProfilePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA929C2A609400002D39BD /* EditProfilePresentor.swift */; };
+		28FA929F2A609454002D39BD /* EditProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA929E2A609454002D39BD /* EditProfileConfigurator.swift */; };
+		28FAAF522A60CDC000427D5F /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF512A60CDC000427D5F /* FirebaseService.swift */; };
+		28FAAF562A60F0EE00427D5F /* EnterNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF552A60F0EE00427D5F /* EnterNumViewController.swift */; };
+		28FAAF582A60F2B800427D5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FAAF572A60F2B800427D5F /* GoogleService-Info.plist */; };
+		28FAAF6A2A61A1DF00427D5F /* SignUpConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF692A61A1DF00427D5F /* SignUpConfigurator.swift */; };
+		28FAAF6C2A61A1E800427D5F /* SignUpPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF6B2A61A1E800427D5F /* SignUpPresentor.swift */; };
+		28FAAF6E2A61A1F000427D5F /* SignUpProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF6D2A61A1F000427D5F /* SignUpProtocols.swift */; };
+		28FAAF702A61A20200427D5F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF6F2A61A20200427D5F /* SignUpViewController.swift */; };
+		28FAAF722A61AA1900427D5F /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAAF712A61AA1900427D5F /* UserDTO.swift */; };
 		93AC84BB462F5217C70427B4 /* Pods_BEERLY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +86,27 @@
 		28E8ED032A5BD9D1009AF1DF /* CartPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresentor.swift; sourceTree = "<group>"; };
 		28E8ED052A5BD9E1009AF1DF /* CartProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProtocols.swift; sourceTree = "<group>"; };
 		28E8ED072A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedDrinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		28E8ED0A2A5BE9A6009AF1DF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		28E8ED0D2A5BE9C0009AF1DF /* ProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProtocols.swift; sourceTree = "<group>"; };
+		28E8ED0F2A5BE9CA009AF1DF /* ProfilePresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresentor.swift; sourceTree = "<group>"; };
+		28E8ED112A5BE9D8009AF1DF /* ProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileConfigurator.swift; sourceTree = "<group>"; };
+		28E8ED152A5BECAF009AF1DF /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		28E90EA62A6330E700D4894D /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		28E90EAB2A63339600D4894D /* SignInConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInConfigurator.swift; sourceTree = "<group>"; };
+		28E90EAD2A6333A700D4894D /* SignInPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentor.swift; sourceTree = "<group>"; };
+		28E90EAF2A6333B000D4894D /* SignInProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInProtocols.swift; sourceTree = "<group>"; };
+		28E90EB12A6333BA00D4894D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		28FA929A2A6093E4002D39BD /* EditProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileProtocols.swift; sourceTree = "<group>"; };
+		28FA929C2A609400002D39BD /* EditProfilePresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePresentor.swift; sourceTree = "<group>"; };
+		28FA929E2A609454002D39BD /* EditProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileConfigurator.swift; sourceTree = "<group>"; };
+		28FAAF512A60CDC000427D5F /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		28FAAF552A60F0EE00427D5F /* EnterNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNumViewController.swift; sourceTree = "<group>"; };
+		28FAAF572A60F2B800427D5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28FAAF692A61A1DF00427D5F /* SignUpConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpConfigurator.swift; sourceTree = "<group>"; };
+		28FAAF6B2A61A1E800427D5F /* SignUpPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresentor.swift; sourceTree = "<group>"; };
+		28FAAF6D2A61A1F000427D5F /* SignUpProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProtocols.swift; sourceTree = "<group>"; };
+		28FAAF6F2A61A20200427D5F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		28FAAF712A61AA1900427D5F /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		431A4921BBD97B500BE12F6F /* Pods_BEERLY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BEERLY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F00775E6EC7A8C9A5FB500 /* Pods-BEERLY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.release.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.release.xcconfig"; sourceTree = "<group>"; };
 		FFD77E2A029C14DCAF428DEA /* Pods-BEERLY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BEERLY.debug.xcconfig"; path = "Target Support Files/Pods-BEERLY/Pods-BEERLY.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				28E8ECCA2A5BC6BE009AF1DF /* Info.plist */,
+				28FAAF572A60F2B800427D5F /* GoogleService-Info.plist */,
 				28E8ECC52A5BC6BE009AF1DF /* Assets.xcassets */,
 				28E8ECC72A5BC6BE009AF1DF /* LaunchScreen.storyboard */,
 			);
@@ -150,6 +193,7 @@
 			children = (
 				28E8ECDD2A5BCCD7009AF1DF /* BeerElementDTO.swift */,
 				28E8ECF92A5BD486009AF1DF /* BeerElementRealmDTO.swift */,
+				28FAAF712A61AA1900427D5F /* UserDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,6 +213,7 @@
 			children = (
 				28E8ECE42A5BCD91009AF1DF /* NetworkLayer.swift */,
 				28E8ECF32A5BD3B8009AF1DF /* RealmService.swift */,
+				28FAAF512A60CDC000427D5F /* FirebaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -184,9 +229,11 @@
 		28E8ECE92A5BCEFC009AF1DF /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				28FAAF532A60F0CC00427D5F /* Authorization */,
 				28E8ECFE2A5BD9AC009AF1DF /* CartPage */,
 				28E8ECEA2A5BD2A9009AF1DF /* BeerInfoPage */,
 				28E8ECD42A5BCBFB009AF1DF /* MainPage */,
+				28E8ED132A5BEBF3009AF1DF /* Profile */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -236,6 +283,102 @@
 				28E8ECFF2A5BD9BD009AF1DF /* CartViewController.swift */,
 			);
 			path = CartPage;
+			sourceTree = "<group>";
+		};
+		28E8ED092A5BE985009AF1DF /* ProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ED112A5BE9D8009AF1DF /* ProfileConfigurator.swift */,
+				28E8ED0F2A5BE9CA009AF1DF /* ProfilePresentor.swift */,
+				28E8ED0D2A5BE9C0009AF1DF /* ProfileProtocols.swift */,
+				28E8ED0A2A5BE9A6009AF1DF /* ProfileViewController.swift */,
+			);
+			path = ProfilePage;
+			sourceTree = "<group>";
+		};
+		28E8ED132A5BEBF3009AF1DF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				28E8ED142A5BEC09009AF1DF /* EditProfilePage */,
+				28E8ED092A5BE985009AF1DF /* ProfilePage */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		28E8ED142A5BEC09009AF1DF /* EditProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				28FA929E2A609454002D39BD /* EditProfileConfigurator.swift */,
+				28FA929C2A609400002D39BD /* EditProfilePresentor.swift */,
+				28FA929A2A6093E4002D39BD /* EditProfileProtocols.swift */,
+				28E8ED152A5BECAF009AF1DF /* EditProfileViewController.swift */,
+			);
+			path = EditProfilePage;
+			sourceTree = "<group>";
+		};
+		28E90EA52A6330C900D4894D /* SplashPage */ = {
+			isa = PBXGroup;
+			children = (
+				28E90EA62A6330E700D4894D /* SplashViewController.swift */,
+			);
+			path = SplashPage;
+			sourceTree = "<group>";
+		};
+		28E90EA82A63335D00D4894D /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				28FAAF682A61A1C900427D5F /* SignUpPage */,
+				28FAAF542A60F0D600427D5F /* EnterNumPage */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		28E90EA92A63337000D4894D /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				28E90EAA2A63337D00D4894D /* SignInPage */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		28E90EAA2A63337D00D4894D /* SignInPage */ = {
+			isa = PBXGroup;
+			children = (
+				28E90EAB2A63339600D4894D /* SignInConfigurator.swift */,
+				28E90EAD2A6333A700D4894D /* SignInPresentor.swift */,
+				28E90EAF2A6333B000D4894D /* SignInProtocols.swift */,
+				28E90EB12A6333BA00D4894D /* SignInViewController.swift */,
+			);
+			path = SignInPage;
+			sourceTree = "<group>";
+		};
+		28FAAF532A60F0CC00427D5F /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				28E90EA92A63337000D4894D /* SignIn */,
+				28E90EA82A63335D00D4894D /* SignUp */,
+				28E90EA52A6330C900D4894D /* SplashPage */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		28FAAF542A60F0D600427D5F /* EnterNumPage */ = {
+			isa = PBXGroup;
+			children = (
+				28FAAF552A60F0EE00427D5F /* EnterNumViewController.swift */,
+			);
+			path = EnterNumPage;
+			sourceTree = "<group>";
+		};
+		28FAAF682A61A1C900427D5F /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				28FAAF692A61A1DF00427D5F /* SignUpConfigurator.swift */,
+				28FAAF6B2A61A1E800427D5F /* SignUpPresentor.swift */,
+				28FAAF6D2A61A1F000427D5F /* SignUpProtocols.swift */,
+				28FAAF6F2A61A20200427D5F /* SignUpViewController.swift */,
+			);
+			path = SignUpPage;
 			sourceTree = "<group>";
 		};
 		362D8E0C69D0E7E00B2087CC /* Frameworks */ = {
@@ -317,6 +460,7 @@
 			files = (
 				28E8ECC92A5BC6BE009AF1DF /* LaunchScreen.storyboard in Resources */,
 				28E8ECC62A5BC6BE009AF1DF /* Assets.xcassets in Resources */,
+				28FAAF582A60F2B800427D5F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,28 +513,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E8ED162A5BECAF009AF1DF /* EditProfileViewController.swift in Sources */,
 				28E8ECEC2A5BD2C5009AF1DF /* BeerInfoViewController.swift in Sources */,
+				28FA929F2A609454002D39BD /* EditProfileConfigurator.swift in Sources */,
 				28E8ECF22A5BD2F2009AF1DF /* BeerInfoProtocols.swift in Sources */,
+				28FAAF522A60CDC000427D5F /* FirebaseService.swift in Sources */,
 				28E8ECFD2A5BD895009AF1DF /* CustomTabBar.swift in Sources */,
 				28E8ECD82A5BCC2A009AF1DF /* MainPagePresentor.swift in Sources */,
 				28E8ECF02A5BD2E6009AF1DF /* BeerInfoConfigurator.swift in Sources */,
 				28E8ED062A5BD9E1009AF1DF /* CartProtocols.swift in Sources */,
 				28E8ECEE2A5BD2DB009AF1DF /* BeerInfoPresentor.swift in Sources */,
 				28E8ED082A5BDC65009AF1DF /* AddedDrinkCollectionViewCell.swift in Sources */,
+				28E90EAC2A63339600D4894D /* SignInConfigurator.swift in Sources */,
 				28E8ECD62A5BCC13009AF1DF /* MainPageViewController.swift in Sources */,
 				28E8ECE22A5BCD2B009AF1DF /* BeerCollectionViewCell.swift in Sources */,
 				28E8ECDC2A5BCC5A009AF1DF /* MainPageConfigurator.swift in Sources */,
 				28E8ECD12A5BC8EB009AF1DF /* AppCoordinator.swift in Sources */,
+				28FAAF722A61AA1900427D5F /* UserDTO.swift in Sources */,
+				28E8ED122A5BE9D8009AF1DF /* ProfileConfigurator.swift in Sources */,
 				28E8ECBD2A5BC6BD009AF1DF /* AppDelegate.swift in Sources */,
+				28FA929D2A609400002D39BD /* EditProfilePresentor.swift in Sources */,
+				28E90EAE2A6333A700D4894D /* SignInPresentor.swift in Sources */,
+				28FA929B2A6093E4002D39BD /* EditProfileProtocols.swift in Sources */,
 				28E8ECBF2A5BC6BD009AF1DF /* SceneDelegate.swift in Sources */,
+				28FAAF6E2A61A1F000427D5F /* SignUpProtocols.swift in Sources */,
+				28FAAF702A61A20200427D5F /* SignUpViewController.swift in Sources */,
 				28E8ED002A5BD9BD009AF1DF /* CartViewController.swift in Sources */,
 				28E8ECDE2A5BCCD7009AF1DF /* BeerElementDTO.swift in Sources */,
+				28FAAF562A60F0EE00427D5F /* EnterNumViewController.swift in Sources */,
 				28E8ED042A5BD9D1009AF1DF /* CartPresentor.swift in Sources */,
+				28E8ED0E2A5BE9C0009AF1DF /* ProfileProtocols.swift in Sources */,
 				28E8ECE52A5BCD91009AF1DF /* NetworkLayer.swift in Sources */,
 				28E8ECF72A5BD439009AF1DF /* AddToBasketButton.swift in Sources */,
 				28E8ED022A5BD9C7009AF1DF /* CartConfigurator.swift in Sources */,
+				28FAAF6C2A61A1E800427D5F /* SignUpPresentor.swift in Sources */,
+				28FAAF6A2A61A1DF00427D5F /* SignUpConfigurator.swift in Sources */,
+				28E90EB02A6333B000D4894D /* SignInProtocols.swift in Sources */,
 				28E8ECFA2A5BD486009AF1DF /* BeerElementRealmDTO.swift in Sources */,
+				28E90EB22A6333BA00D4894D /* SignInViewController.swift in Sources */,
+				28E8ED102A5BE9CA009AF1DF /* ProfilePresentor.swift in Sources */,
 				28E8ECE82A5BCE96009AF1DF /* CodeHelper.swift in Sources */,
+				28E90EA72A6330E700D4894D /* SplashViewController.swift in Sources */,
+				28E8ED0B2A5BE9A6009AF1DF /* ProfileViewController.swift in Sources */,
 				28E8ECDA2A5BCC36009AF1DF /* MainPageProtocols.swift in Sources */,
 				28E8ECF42A5BD3B8009AF1DF /* RealmService.swift in Sources */,
 			);
@@ -535,6 +699,7 @@
 				DEVELOPMENT_TEAM = Z29P7FCR6C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BEERLY/Resources/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -563,6 +728,7 @@
 				DEVELOPMENT_TEAM = Z29P7FCR6C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BEERLY/Resources/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow access.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
