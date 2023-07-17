@@ -29,7 +29,6 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileImageView: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(systemName: "person.circle")
         view.tintColor = .white
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 75
@@ -39,7 +38,6 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileName: UILabel = {
         var label = UILabel()
-        label.text = appDelegate.userAddInfo?.name
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -50,7 +48,6 @@ class ProfileViewController: UIViewController {
     private lazy var profileNum: UILabel = {
         var label = UILabel()
         label.textColor = .white
-        label.text = appDelegate.userAddInfo?.phoneNum
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont(name: "Avenir Next Medium", size: 16)
@@ -60,7 +57,6 @@ class ProfileViewController: UIViewController {
     private lazy var profileAdress: UILabel = {
         var label = UILabel()
         label.textColor = .white
-        label.text = appDelegate.userAddInfo?.address
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont(name: "Avenir Next Medium", size: 16)
@@ -89,6 +85,8 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        profilePresentorDelegate?.getUsersData(uid: appDelegate.currentUser?.uid ?? "")
     }
     
     private func setUpUI() {
@@ -123,17 +121,20 @@ class ProfileViewController: UIViewController {
         
         profileName.snp.makeConstraints { maker in
             maker.top.equalTo(profileImageView.snp.bottom).offset(20)
-            maker.centerX.equalToSuperview()
+            maker.left.equalToSuperview().offset(20)
+            maker.right.equalToSuperview().offset(-20)
         }
         
         profileNum.snp.makeConstraints { maker in
             maker.top.equalTo(profileName.snp.bottom).offset(20)
-            maker.centerX.equalToSuperview()
+            maker.left.equalToSuperview().offset(20)
+            maker.right.equalToSuperview().offset(-20)
         }
         
         profileAdress.snp.makeConstraints { maker in
             maker.top.equalTo(profileNum.snp.bottom).offset(20)
-            maker.centerX.equalToSuperview()
+            maker.left.equalToSuperview().offset(20)
+            maker.right.equalToSuperview().offset(-20)
         }
         
         editProfileButton.snp.makeConstraints { maker in
@@ -152,7 +153,13 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func editProfile() {
-        let editProfileVC = EditProfilePageConfigurator.build(name: profileName.text!, adress: profileAdress.text!, usersImage: profileImageView.image!)
+        guard let name = profileName.text,
+              let adress = profileAdress.text,
+              name.count != 0,
+              adress.count != 0
+        else { return }
+        
+        let editProfileVC = EditProfilePageConfigurator.build(name: name, adress: adress, usersImage: (profileImageView.image ?? UIImage(systemName: "person.circle"))!)
         editProfileVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(editProfileVC, animated: true)
     }
@@ -161,9 +168,20 @@ class ProfileViewController: UIViewController {
     private func signOut() {
         profilePresentorDelegate?.logOut()
     }
+    
+    func convertDataToImage(data: Data) -> UIImage {
+        return UIImage(data: data) ?? UIImage(systemName: "person.circle")!
+    }
 }
 
 extension ProfileViewController: ProfileVCDelegate {
+    func getUsersData(data: UserAdditionalInfo) {
+        profileName.text = data.name
+        profileNum.text = data.phoneNum
+        profileAdress.text = data.address
+        profileImageView.image = convertDataToImage(data: (data.image))
+    }
+    
     func logOut(result: Bool) {
         if result {
             let splashVC = UINavigationController(rootViewController: SplashViewController())

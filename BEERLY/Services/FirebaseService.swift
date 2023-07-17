@@ -5,7 +5,7 @@
 //  Created by Zhansuluu Kydyrova on 13/7/23.
 //
 
-import Foundation
+import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
@@ -27,11 +27,10 @@ class FirebaseService {
                     let name = data["name"] as? String ?? ""
                     let adress = data["address"] as? String ?? ""
                     let phoneNum = data["phone"] as? String ?? ""
-                    let userInfo = UserAdditionalInfo(name: name, address: adress, phoneNum: phoneNum)
+                    let photo = data["photo"] as? Data ?? nil
+                    let userInfo = UserAdditionalInfo(name: name, address: adress, phoneNum: phoneNum, image: photo ?? Data())
                     completion(.success(userInfo))
                 }
-            } else {
-                completion(.failure(error!))
             }
         }
     }
@@ -44,23 +43,21 @@ extension FirebaseService: SignUpServiceProtocol {
                 completion(.failure(error!))
                 return
             }
-            
             completion(.success(true))
             
             let userData = [
                 "name": additionalInfo.name,
                 "address": additionalInfo.address,
-                "phone": additionalInfo.phoneNum
+                "phone": additionalInfo.phoneNum,
+                "photo": nil
             ]
-            
-            self?.db.collection("users").document(result.user.uid).setData(userData) { error in
+            self?.db.collection("users").document(result.user.uid).setData(userData as [String : Any]) { error in
                 if let error = error {
                     completion(.failure(error))
                 }
             }
             
             self?.appDelegate.currentUser = User(email: result.user.email ?? "", password: "error", uid: result.user.uid)
-            
             self?.fetchUsersAddInfo(uid: result.user.uid) { result in
                 switch result {
                 case .success(let success):
@@ -96,6 +93,10 @@ extension FirebaseService: SignInServiceProtocol {
 }
 
 extension FirebaseService: ProfileServiceProtocol {
+    func getUsersData(uid: String, completion: @escaping (Result<UserAdditionalInfo, Error>) -> Void) {
+        fetchUsersAddInfo(uid: uid, completion: completion)
+    }
+    
     func logOut(completion: @escaping (Bool) -> Void) {
         do {
             try Auth.auth().signOut()
@@ -107,14 +108,43 @@ extension FirebaseService: ProfileServiceProtocol {
 }
 
 extension FirebaseService: EditProfileServiceProtocol {
-    func updateData(uid: String, name: String, adress: String) {
-        let documentRef = db.collection("users").document(uid)
-        
+    func updateDataWithoutPhoto(uid: String, name: String, adress: String) {
         let userData = [
             "name": name,
             "address": adress
         ]
-        
+        let documentRef = db.collection("users").document(uid)
         documentRef.updateData(userData)
+        
+        self.fetchUsersAddInfo(uid: uid) { [weak self] result in
+            switch result {
+            case .success(let success):
+                self?.appDelegate.userAddInfo = success
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func updateData(uid: String, name: String, adress: String, photo: UIImage) {
+        guard let imageData = photo.jpegData(compressionQuality: 0.8) else { return }
+            
+        let userData = [
+            "name": name,
+            "address": adress,
+            "photo": imageData
+        ] as [String : Any]
+        
+        let documentRef = db.collection("users").document(uid)
+        documentRef.updateData(userData)
+        
+        self.fetchUsersAddInfo(uid: uid) { [weak self] result in
+            switch result {
+            case .success(let success):
+                self?.appDelegate.userAddInfo = success
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

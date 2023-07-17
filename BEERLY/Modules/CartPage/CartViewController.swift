@@ -90,7 +90,15 @@ class CartViewController: UIViewController {
     }()
     
     private lazy var alert: UIAlertController = {
-        var alert = UIAlertController (title: "Your order is accepted", message: "Wait for the call. Your phone number: \(appDelegate.userAddInfo?.phoneNum)", preferredStyle: .alert)
+        var alert = UIAlertController (title: "Your order is accepted", message: "Wait for the call. Your phone number: \(appDelegate.userAddInfo!.phoneNum)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        return alert
+    }()
+    
+    private lazy var emptyCartAlert: UIAlertController = {
+        var alert = UIAlertController (title: "The cart is empty", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         
@@ -109,6 +117,10 @@ class CartViewController: UIViewController {
     
     @objc
     func getOrderButton() {
+        guard !addedBeersList.isEmpty else {
+            present(emptyCartAlert, animated: true)
+            return
+        }
         present(alert, animated: true)
         do {
             try presentorToService?.deleteAll()
@@ -122,6 +134,10 @@ class CartViewController: UIViewController {
     
     @objc
     func deleteAll() {
+        guard !addedBeersList.isEmpty else {
+            present(emptyCartAlert, animated: true)
+            return
+        }
         do {
             try presentorToService?.deleteAll()
         } catch {

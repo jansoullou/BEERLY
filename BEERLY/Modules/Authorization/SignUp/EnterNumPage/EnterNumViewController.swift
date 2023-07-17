@@ -25,6 +25,7 @@ class EnterNumViewController: UIViewController {
         var textField = UITextField()
         textField.placeholder = "Phone Number"
         textField.textColor = .gray
+        textField.delegate = self
         return textField
     }()
     
@@ -114,7 +115,8 @@ class EnterNumViewController: UIViewController {
             wrongNum()
             return
         }
-        
+
+        print(phoneNumberTextField.text!)
         let signUpVC = SignUpConfigurator.build(phoneNum: phoneNumberTextField.text!)
         signUpVC.modalPresentationStyle = .fullScreen
     
@@ -129,5 +131,31 @@ class EnterNumViewController: UIViewController {
             self?.phoneNumberTextField.placeholder = "Phone Number"
         }
     }
+    
+    func format(with mask: String, phone: String) -> String {
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex
+
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                result.append(numbers[index])
+
+                index = numbers.index(after: index)
+
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
+    }
 }
 
+extension EnterNumViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return false }
+        let newString = (text as NSString).replacingCharacters(in: range, with: string)
+        textField.text = format(with: "+X (XXX) XXX-XXXX", phone: newString)
+        return false
+    }
+}

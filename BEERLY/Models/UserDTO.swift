@@ -17,5 +17,6 @@ struct UserAdditionalInfo {
     var name: String
     var address: String
     var phoneNum: String
+    var image: Data
 }
 

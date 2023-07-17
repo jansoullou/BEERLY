@@ -97,11 +97,6 @@ class SignUpViewController: UIViewController {
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print(phoneNumber)
-    }
-    
     override func loadView() {
         super.loadView()
         setUpUI()
@@ -201,7 +196,7 @@ class SignUpViewController: UIViewController {
         }
         
         let user = User(email: emailTextField.text!, password: passwordTextField.text!, uid: "")
-        let addInfo = UserAdditionalInfo(name: nameTextField.text!, address: adressTextField.text!, phoneNum:  phoneNumber!)
+        let addInfo = UserAdditionalInfo(name: nameTextField.text!, address: adressTextField.text!, phoneNum:  phoneNumber!, image: Data())
         print(user)
         presentor?.signUp(user: user, additionalInfo: addInfo)
     }

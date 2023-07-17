@@ -27,6 +27,14 @@ class EditProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private lazy var imagePickerController: UIImagePickerController = {
+        let view = UIImagePickerController()
+        view.delegate = self
+        view.allowsEditing = true
+        view.sourceType = .photoLibrary
+        return view
+    }()
+    
     private lazy var containerView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(
@@ -40,7 +48,7 @@ class EditProfileViewController: UIViewController {
         return view
     }()
 
-    lazy var profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         var view = UIImageView()
         view.image = usersImage
         view.tintColor = .white
@@ -49,15 +57,23 @@ class EditProfileViewController: UIViewController {
         view.clipsToBounds = true
         return view
     }()
+    
+    private lazy var editImage: UIButton = {
+        var button = UIButton()
+        button.setImage(UIImage(named: "editImageIcon"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(edit), for: .touchUpInside)
+        return button
+    }()
 
-    lazy var profileNameTextField: UITextField = {
+    private lazy var profileNameTextField: UITextField = {
         var tf = UITextField()
         tf.text = name
         tf.font = UIFont(name: "Avenir Next Medium", size: 16)
         return tf
     }()
 
-    lazy var profileAdressTextField: UITextField = {
+    private lazy var profileAdressTextField: UITextField = {
         var tf = UITextField()
         tf.text = adress
         tf.font = UIFont(name: "Avenir Next Medium", size: 16)
@@ -94,8 +110,18 @@ class EditProfileViewController: UIViewController {
     @objc
     private func saveInfo() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        editProfilePresentorDelegate?.updateData(uid: appDelegate.currentUser!.uid, name: profileNameTextField.text!, adress: profileAdressTextField.text!)
+        if profileImageView.image != UIImage(systemName: "person.circle") {
+            editProfilePresentorDelegate?.updateData(uid: appDelegate.currentUser!.uid, name: profileNameTextField.text!, adress: profileAdressTextField.text!, photo: profileImageView.image!)
+        } else {
+            editProfilePresentorDelegate?.updateDataWithoutPhoto(uid: appDelegate.currentUser!.uid, name: profileNameTextField.text!, adress:  profileAdressTextField.text!)
+        }
+        
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func edit() {
+        showImagePickerController()
     }
 
     private func setUpUI() {
@@ -107,6 +133,7 @@ class EditProfileViewController: UIViewController {
     private func setUpSubviews() {
         view.addSubview(containerView)
         containerView.addSubview(profileImageView)
+        containerView.addSubview(editImage)
         containerView.addSubview(profileNameTextField)
         containerView.addSubview(profileAdressTextField)
         containerView.addSubview(saveInfoButton)
@@ -146,7 +173,29 @@ class EditProfileViewController: UIViewController {
             maker.right.equalToSuperview().offset(-40)
             maker.height.equalTo(40)
         }
+        
+        editImage.snp.makeConstraints { maker in
+            maker.bottom.equalTo(profileImageView).offset(10)
+            maker.right.equalTo(profileImageView)
+            maker.width.height.equalTo(35)
+        }
     }
 }
 
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func showImagePickerController() {
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            usersImage = editedImage
+            profileImageView.image = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            usersImage = originalImage
+            profileImageView.image = originalImage
+        }
 
+        dismiss(animated: true)
+    }
+}
