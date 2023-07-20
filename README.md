@@ -1,19 +1,19 @@
-# Beerly
+# Beerly🍻
 
-## Description
+## 🗺️Description
 
 Beerly is a mobile app (pet project) that serves as the ultimate companion for beer enthusiasts and customers of our beloved beer company. With Beerly, you can explore an extensive collection of beers, place orders, and manage your account all in one place. Whether you're a beer connoisseur looking for new flavors or simply interested in discovering delightful brews, Beerly is the perfect app for you.
 
-## App Preview
+## 🖥️App Preview
 
 ![SignIn](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQ2MmtvOTA4NzU5a3hsaWhjMzlpdXN2bXBpZTljdW55N3cxN3h6aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bkR0EEjbKY8nnWbenA/giphy.gif)
 ![BeerList](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdwNXdhMjZtcHQ0ZHVtZWg3eHBrdHV5dWU0ZDA5Mmc2YzdpOGh5ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/enWSm21nH04opKkfWw/giphy.gif)
 ![SearchPage](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenk5NHlxYXc4anA1OHRjMzhjOGlsNHMzd3o4OTI5dHI3ZDJpM3B1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jFzwX0IXHA3NNGDQqg/giphy.gif)
 ![AddToCart](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmQ5ZnI4dm1zaXgyYW5rM3F3bmEwN3gzdGNoZ3FzY291bjhha3g3aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tKVDW7RwX7PDRCJZNV/giphy.gif)
 ![Cart](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJ1Z2dtYmpmbzR3YzY5ZTB4ZDlodXBwMXY5ZnF0djNnMDd3aXhpdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hta06Oput4YYaHVtej/giphy.gif)
-![User](https://imgur.com/a/HbDH9Kz)
+![User](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmlva254cHI5c3N4dzdidmNzYXNxN2UwNTI1OGN1cnlyZG4xYTN0dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8HwWMItdvmTwfrbOCP/giphy.gif)
 
-## App Features
+## 🎢App Features
 
 + Beer Catalog: Browse through a diverse selection of beers, including a wide range of flavors, styles, and breweries. Discover popular picks, new arrivals, and special editions to elevate your beer-drinking experience.
 
@@ -25,7 +25,7 @@ Beerly is a mobile app (pet project) that serves as the ultimate companion for b
 
 + Cart and Ordering: Add your desired beers to the shopping cart and proceed to a seamless checkout process. Place your order and have your favorite beers delivered right to your doorstep or prepared for pickup at our Beerly store.
 
-## Project Features
+## 📁Project Features
 
 + Swift UIKit
 
@@ -42,7 +42,7 @@ Beerly is a mobile app (pet project) that serves as the ultimate companion for b
 + Dependency Injection
 
 
-## Libraries
+## 📚Libraries
 
 + SnapKit: A Swift Auto Layout library that simplifies UI development by defining constraints programmatically.
 
@@ -53,7 +53,7 @@ Beerly is a mobile app (pet project) that serves as the ultimate companion for b
 + Cosmos: A Swift library for customizable star rating components, enabling easy implementation of rating systems in apps.
 
 
-## Links
+## 🔗Links
 
 [Punk API](https://punkapi.com) - A comprehensive API with a wide selection of beers, providing detailed information about various brews.
 
