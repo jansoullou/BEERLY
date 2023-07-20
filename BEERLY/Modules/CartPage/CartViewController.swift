@@ -12,7 +12,6 @@ class CartViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    var presentorToVC: CartPresentorToVC?
     var presentorToService: CartPresentorToService?
     
     private var addedBeersList = [BeerElement]()
@@ -106,8 +105,8 @@ class CartViewController: UIViewController {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchProducts()
-        presentorToVC?.sendProducts()
+        super.viewWillAppear(animated)
+        presentorToService?.fetchProductsToList(uid: appDelegate.currentUser?.uid ?? "")
     }
     
     override func loadView() {
@@ -121,13 +120,8 @@ class CartViewController: UIViewController {
             present(emptyCartAlert, animated: true)
             return
         }
+        presentorToService?.deleteAll(uid: appDelegate.currentUser?.uid ?? "")
         present(alert, animated: true)
-        do {
-            try presentorToService?.deleteAll()
-        } catch {
-            print(error.localizedDescription)
-        }
-        
         addedBeersList = [BeerElement]()
         addedBeersCollectionView.reloadData()
     }
@@ -138,12 +132,7 @@ class CartViewController: UIViewController {
             present(emptyCartAlert, animated: true)
             return
         }
-        do {
-            try presentorToService?.deleteAll()
-        } catch {
-            print(error.localizedDescription)
-        }
-        
+        presentorToService?.deleteAll(uid: appDelegate.currentUser?.uid ?? "")
         addedBeersList = [BeerElement]()
         addedBeersCollectionView.reloadData()
     }
@@ -210,16 +199,20 @@ extension CartViewController: UICollectionViewDataSource {
     }
 }
 
-extension CartViewController: CartVCToPresentor{
+extension CartViewController: CartVCDelegate {
+    func receiveDeleteMessage() {
+        print("cart is empty")
+    }
+    
+    func receiveError(error: Error) {
+        print(error.localizedDescription)
+    }
+    
     func receiveProducts(products: [BeerElement]) {
         addedBeersList = products
         DispatchQueue.main.async {
             self.addedBeersCollectionView.reloadData()
         }
-    }
-    
-    func fetchProducts() {
-        presentorToService?.fetchProductsToList()
     }
 }
 

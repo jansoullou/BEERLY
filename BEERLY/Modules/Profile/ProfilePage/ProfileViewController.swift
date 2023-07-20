@@ -188,6 +188,7 @@ extension ProfileViewController: ProfileVCDelegate {
             splashVC.modalPresentationStyle = .overFullScreen
             present(splashVC, animated: true)
             self.appDelegate.currentUser = nil
+            self.appDelegate.userAddInfo = nil
         }
     }
     

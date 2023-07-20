@@ -16,6 +16,7 @@ class CustomTabBarController: UITabBarController {
         private func setupVC() {
             viewControllers = [
                 createControllers(for: MainPageConfigurator.build(), image: UIImage(systemName: "house.circle")!),
+                createControllers(for: SearchPageConfigurator.build(), image: UIImage(systemName: "magnifyingglass")!),
                 createControllers(for: CartConfigurator.build(), image: UIImage(systemName: "basket.fill")!),
                 createControllers(for: ProfilePageConfigurator.build(), image: UIImage(systemName: "person.fill")!)
             ]

@@ -1,5 +1,5 @@
 //
-//  FirebaseAuthService.swift
+//  FirebaseService.swift
 //  BEERLY
 //
 //  Created by Zhansuluu Kydyrova on 13/7/23.
@@ -13,13 +13,12 @@ import FirebaseFirestore
 class FirebaseService {
     
     static let shared = FirebaseService()
+    private init() { }
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let db = Firestore.firestore()
     
-    private init() { }
-    
-    func fetchUsersAddInfo(uid: String, completion: @escaping (Result<UserAdditionalInfo, Error>) -> Void) {
+    private func fetchUsersAddInfo(uid: String, completion: @escaping (Result<UserAdditionalInfo, Error>) -> Void) {
         let docRef = db.collection("users").document(uid)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -32,6 +31,22 @@ class FirebaseService {
                     completion(.success(userInfo))
                 }
             }
+        }
+    }
+    
+    private func fetchBeerListDoc(uid: String, completion: @escaping (Result<[QueryDocumentSnapshot], Error>) -> Void)  {
+        let collectionRef = db.collection("usersBeers").document(uid).collection("beerList")
+        collectionRef.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard let documents = snapshot?.documents else {
+                completion(.failure(error!))
+                return
+            }
+            
+            completion(.success(documents))
         }
     }
 }
@@ -128,7 +143,7 @@ extension FirebaseService: EditProfileServiceProtocol {
     
     func updateData(uid: String, name: String, adress: String, photo: UIImage) {
         guard let imageData = photo.jpegData(compressionQuality: 0.8) else { return }
-            
+        
         let userData = [
             "name": name,
             "address": adress,
@@ -148,3 +163,84 @@ extension FirebaseService: EditProfileServiceProtocol {
         }
     }
 }
+
+extension FirebaseService: FirebaseServiceProtocol{
+    func postBeerData(uid: String, beer: BeerElement, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let collectionRef = db.collection("usersBeers").document(uid).collection("beerList")
+        fetchBeerListDoc(uid: uid) { result in
+            switch result {
+            case .success(let success):
+                let beerData = [
+                    "id": beer.id ?? 0,
+                    "name": beer.name ?? "",
+                    "description": beer.description ?? "",
+                    "tagline": beer.tagline ?? "",
+                    "image_url": beer.imageURL ?? "https://images.punkapi.com/v2/keg.png",
+                    "brewers_tips": beer.brewersTips ?? "",
+                    "contributed_by": beer.contributedBy ?? ""
+                ] as [String : Any]
+                
+                let documentRef = collectionRef.document("\(success.count + 1)")
+                documentRef.setData(beerData as [String : Any]) { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    }
+                    completion(.success(true))
+                }
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+    }
+}
+
+extension FirebaseService: CartServiceProtocol {
+    func deleteAll(uid: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let collectionRef = db.collection("usersBeers").document(uid).collection("beerList")
+        fetchBeerListDoc(uid: uid) { result in
+            switch result {
+            case .success(let success):
+                let count = success.count
+                
+                for doc in 1...count {
+                    let docRef = collectionRef.document("\(doc)")
+                    docRef.delete() { error in
+                        if let error = error {
+                            completion(.failure(error))
+                        }
+                    }
+                }
+                completion(.success(true))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+    }
+    
+    func fetchBeersData(uid: String, completion: @escaping (Result<[BeerElement], Error>) -> Void) {
+        let collectionRef = db.collection("usersBeers").document(uid).collection("beerList")
+        
+        fetchBeerListDoc(uid: uid) { result in
+            switch result {
+            case .success(let success):
+                var beers = [BeerElement]()
+                for document in success {
+                    let data = document.data()
+                    let id = data["id"] as? Int
+                    let name = data["name"] as? String
+                    let description = data["description"] as? String
+                    let tagline = data["tagline"] as? String
+                    let imageURL = data["image_url"] as? String
+                    let brewersTips = data["brewers_tips"] as? String
+                    let contributedBy = data["contributed_by"] as? String
+                    let beer = BeerElement(id: id, name: name, description: description, tagline: tagline, imageURL: imageURL, brewersTips: brewersTips, contributedBy: contributedBy)
+                    beers.append(beer)
+                }
+                completion(.success(beers))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+    }
+}
+

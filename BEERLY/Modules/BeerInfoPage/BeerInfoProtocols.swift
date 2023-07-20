@@ -8,14 +8,15 @@
 import Foundation
 import RealmSwift
 
-protocol RealmServiceProtocol: AnyObject {
-    func saveObject(object: Object) throws
+protocol FirebaseServiceProtocol: AnyObject {
+    func postBeerData(uid: String, beer: BeerElement, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 protocol BeerInfoVCDelegate: AnyObject {
-    func buttonTouched(object: BeerElement)
+    func isDataSent()
+    func getError(error: Error)
 }
 
 protocol BeerInfoPresentorDelegate: AnyObject {
-    func addBeerToTheBasket(object: Object)
+    func saveObject(uid: String, beer: BeerElement)
 }

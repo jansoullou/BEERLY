@@ -1,18 +1,18 @@
 //
-//  BeerCollectionViewCell.swift
+//  FilteredBeerCollectionViewCell.swift
 //  BEERLY
 //
-//  Created by Zhansuluu Kydyrova on 10/7/23.
+//  Created by Zhansuluu Kydyrova on 17/7/23.
 //
 
 import UIKit
 import SnapKit
 import Kingfisher
 
-class BeerCollectionViewCell: UICollectionViewCell {
+class FilteredBeerCollectionViewCell: UICollectionViewCell {
     
-    static var reuseIdentifier = String(describing: BeerCollectionViewCell.self)
-        
+    static var reuseIdentifier = String(describing: FilteredBeerCollectionViewCell.self)
+    
     private lazy var productImage: UIImageView! = {
         var productImage = UIImageView()
         productImage.contentMode = .scaleAspectFit
@@ -70,7 +70,7 @@ class BeerCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension BeerCollectionViewCell {
+extension FilteredBeerCollectionViewCell {
     private func setUpUI() {
         setUpSubviews()
         setUpConstraints()
@@ -123,6 +123,7 @@ extension BeerCollectionViewCell {
         productImage.kf.setImage(with: URL(string: product.imageURL ?? "https://images.punkapi.com/v2/keg.png"))
     }
 }
+
 
 
 

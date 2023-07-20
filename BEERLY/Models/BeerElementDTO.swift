@@ -8,10 +8,10 @@
 import Foundation
 
 struct BeerElement: Codable {
-    let id: Int?
-    let name, description, tagline: String?
-    let imageURL: String?
-    let brewersTips, contributedBy: String?
+    var id: Int?
+    var name, description, tagline: String?
+    var imageURL: String?
+    var brewersTips, contributedBy: String?
     
     enum CodingKeys: String, CodingKey {
         case id

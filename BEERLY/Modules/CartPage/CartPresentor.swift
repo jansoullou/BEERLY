@@ -6,34 +6,32 @@
 //
 
 import Foundation
-import RealmSwift
 
 class CartPresentor: CartPresentorToService {
-    var vc: CartVCToPresentor?
     
-    var realmService: CartRealmServiceProtocol?
-    
-    private var addedBeersList = [BeerElement]()
-    
-    func fetchProductsToList() {
-        addedBeersList = [BeerElement]()
-        guard let objects = realmService?.fetch(by: BeerElementDTO.self) else { return }
-        for object in objects {
-            let model = object.toBeerElement()
-            print("model: \(model)")
-            addedBeersList.append(model)
+    var vc: CartVCDelegate?
+    var service: CartServiceProtocol?
+        
+    func fetchProductsToList(uid: String) {
+        service?.fetchBeersData(uid: uid) { [weak self] result in
+            switch result {
+            case .success(let success):
+                self?.vc?.receiveProducts(products: success)
+            case .failure(let failure):
+                self?.vc?.receiveError(error: failure)
+            }
         }
     }
-    
-    func deleteAll() throws {
-        try realmService?.deleteAll()
-        addedBeersList = [BeerElement]()
-    }
-}
 
-extension CartPresentor: CartPresentorToVC {
-    func sendProducts() {
-        vc?.receiveProducts(products: addedBeersList)
+    func deleteAll(uid: String) {
+        service?.deleteAll(uid: uid) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.vc?.receiveDeleteMessage()
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
     }
 }
 

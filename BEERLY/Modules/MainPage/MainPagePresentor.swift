@@ -13,13 +13,13 @@ class MainPagePresentor {
 }
 
 extension MainPagePresentor: MainPagePresenterDelegate {
-    func getBeerList() {
-        networkLayerDelegate?.fetchData { result in
+    func getBeerList(page: Int) {
+        networkLayerDelegate?.fetchData(page: page) { [weak self] result in
             switch result {
             case .success(let model):
-                self.mainPageControllerDelegate?.recieveBeer(beers: model)
+                self?.mainPageControllerDelegate?.recieveBeer(beers: model)
             case .failure(let error):
-                self.mainPageControllerDelegate?.recieveError(error: error)
+                self?.mainPageControllerDelegate?.recieveError(error: error)
                 print(error)
             }
         }

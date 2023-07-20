@@ -13,9 +13,9 @@ protocol MainPageControllerDelegate: AnyObject {
 }
 
 protocol MainPagePresenterDelegate: AnyObject {
-    func getBeerList()
+    func getBeerList(page: Int)
 }
 
 protocol MainPageNetworkLayerProtocol: AnyObject {
-    func fetchData(completion: @escaping (Result<[BeerElement], Error>) -> Void)
+    func fetchData(page: Int, completion: @escaping (Result<[BeerElement], Error>) -> Void)
 }

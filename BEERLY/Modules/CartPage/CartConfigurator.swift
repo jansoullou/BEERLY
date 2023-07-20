@@ -11,13 +11,12 @@ class CartConfigurator {
     static func build() -> UIViewController {
         let vc = CartViewController()
         let presentor = CartPresentor()
-        let service = RealmService.shared
+        let service = FirebaseService.shared
         
-        vc.presentorToVC = presentor
         vc.presentorToService = presentor
         
         presentor.vc = vc
-        presentor.realmService = service
+        presentor.service = service
         
         return vc
     }
