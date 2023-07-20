@@ -2,6 +2,7 @@
 
 
 
+
 ## 🗺️Description
 
 Beerly is a mobile app (pet project) that serves as the ultimate companion for beer enthusiasts and customers of our beloved beer company. With Beerly, you can explore an extensive collection of beers, place orders, and manage your account all in one place. Whether you're a beer connoisseur looking for new flavors or simply interested in discovering delightful brews, Beerly is the perfect app for you.
@@ -51,8 +52,6 @@ Beerly is a mobile app (pet project) that serves as the ultimate companion for b
 + Kingfisher: A lightweight Swift library for image downloading and caching, enhancing performance and user experience.
 
 + Firebase: A comprehensive mobile development platform by Google, offering services like Real-time Database, Authentication, and Cloud Firestore for seamless backend integration in iOS apps.
-
-+ Cosmos: A Swift library for customizable star rating components, enabling easy implementation of rating systems in apps.
 
 
 ## 🔗Links
