@@ -8,26 +8,18 @@
 import Foundation
 import RealmSwift
 
-protocol CartVCToPresentor {
-    func fetchProducts()
+protocol CartVCDelegate {
     func receiveProducts(products: [BeerElement])
-}
-
-protocol CartPresentorToVC {
-    func sendProducts()
+    func receiveError(error: Error)
+    func receiveDeleteMessage()
 }
 
 protocol CartPresentorToService {
-    func fetchProductsToList()
-    func deleteAll() throws
+    func fetchProductsToList(uid: String)
+    func deleteAll(uid: String)
 }
 
-protocol CartRealmServiceProtocol {
-    func deleteObject(object: Object) throws
-    func deleteAll() throws
-    func fetch<T: Object>(by type: T.Type) -> [T]
-}
-
-protocol CartToBeerInfoDelegate: AnyObject {
-    func updateData()
+protocol CartServiceProtocol {
+    func deleteAll(uid: String, completion: @escaping(Result<Bool, Error>) -> Void)
+    func fetchBeersData(uid: String, completion: @escaping(Result<[BeerElement], Error>) -> Void)
 }

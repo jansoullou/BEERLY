@@ -10,12 +10,12 @@ import UIKit
 class BeerInfoPageConfigurator {
     static func build(beer: BeerElement) -> UIViewController {
         let vc = BeerInfoViewController(beer: beer)
-        let service = RealmService.shared
+        let service = FirebaseService.shared
         let presenter = BeerInfoPresentor()
         
         vc.beerPresentorDelegate = presenter
         
-        presenter.realmService = service
+        presenter.firebaseService = service
         presenter.beerVCDelegate = vc
                 
         return vc

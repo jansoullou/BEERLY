@@ -6,7 +6,6 @@ target 'BEERLY' do
   use_frameworks!
 pod 'SnapKit'
 pod 'Kingfisher'
-pod 'RealmSwift'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Firestore'

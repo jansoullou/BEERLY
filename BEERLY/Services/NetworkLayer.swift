@@ -8,7 +8,6 @@
 import Foundation
 
 final class NetworkLayer {
-    
     static let shared = NetworkLayer()
     
     enum ApiType {
@@ -37,19 +36,8 @@ final class NetworkLayer {
             return components
         }
     }
-}
     
-extension NetworkLayer: MainPageNetworkLayerProtocol {
-    func fetchData(completion: @escaping (Result<[BeerElement], Error>) -> Void) {
-        let apiType = ApiType.fetchAllDrinks
-        let components = apiType.components
-
-        guard let url = components.url else {
-            print("URL is nil")
-            return
-        }
-        print(url)
-        
+    private func fetchData<T: Codable>(url: URL, completion: @escaping (Result<[T], Error>) -> Void) {
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
@@ -61,11 +49,48 @@ extension NetworkLayer: MainPageNetworkLayerProtocol {
                 return
             }
             
-            if let model: [BeerElement] = CodeHelper.decodeDataToObject(data: data) {
+            if var model: [T] = CodeHelper.decodeDataToObject(data: data) {
                 completion(.success(model))
             }
         }
         task.resume()
     }
 }
+    
+extension NetworkLayer: MainPageNetworkLayerProtocol {
+    func fetchData(page: Int, completion: @escaping (Result<[BeerElement], Error>) -> Void) {
+        let apiType = ApiType.fetchAllDrinks
+        var components = apiType.components
 
+        components.queryItems = [
+            URLQueryItem(name: "page", value: "\(page)")
+        ]
+        
+        guard let url = components.url else {
+            print("URL is nil")
+            return
+        }
+        print(url)
+        
+        fetchData(url: url, completion: completion)
+    }
+}
+
+extension NetworkLayer: SearchPageNetworkLayerProtocol {
+    func fetchFilteredBeerList(search: String, completion: @escaping (Result<[BeerElement], Error>) -> Void) {
+          let apiType = ApiType.fetchAllDrinks
+          var components = apiType.components
+          
+          components.queryItems = [
+              URLQueryItem(name: "beer_name", value: search)
+          ]
+          
+          guard let url = components.url else {
+              print("URL is nil")
+              return
+          }
+          print(url)
+          
+          fetchData(url: url, completion: completion)
+      }
+}

@@ -13,8 +13,6 @@ class AddedDrinkCollectionViewCell: UICollectionViewCell {
     
     static var reuseIdentifier = String(describing: AddedDrinkCollectionViewCell.self)
     
-    var drink: BeerElement?
-    
     private lazy var productImage: UIImageView! = {
         var productImage = UIImageView()
         productImage.contentMode = .scaleAspectFit
@@ -101,11 +99,9 @@ extension AddedDrinkCollectionViewCell {
     }
     
     func displayInfo(product: BeerElement) {
-        drink = product
-        print(product)
         productLabel.text = product.name?.uppercased()
         taglineLabel.text = product.tagline?.uppercased()
-        productImage.kf.setImage(with: URL(string: product.imageURL ?? ""))
+        productImage.kf.setImage(with: URL(string: product.imageURL ?? "https://images.punkapi.com/v2/keg.png"))
     }
 }
 

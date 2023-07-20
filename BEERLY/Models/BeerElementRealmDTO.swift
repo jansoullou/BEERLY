@@ -40,7 +40,7 @@ extension BeerElement {
         BeerElementDTO(name: name ?? "",
                        description: description ?? "",
                        tagline: tagline ?? "",
-                       imageURL: imageURL ?? "",
+                       imageURL: imageURL ?? "https://images.punkapi.com/v2/keg.png",
                        brewersTips: brewersTips ?? "",
                        contributedBy: contributedBy ?? "",
                        id: id)

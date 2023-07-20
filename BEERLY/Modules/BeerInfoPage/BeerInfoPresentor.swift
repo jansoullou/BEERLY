@@ -10,13 +10,20 @@ import RealmSwift
 
 class BeerInfoPresentor {
     var beerVCDelegate: BeerInfoVCDelegate?
-    var realmService: RealmServiceProtocol?
+    var firebaseService: FirebaseServiceProtocol?
 }
 
 extension BeerInfoPresentor: BeerInfoPresentorDelegate {
-    func addBeerToTheBasket(object: Object) {
-        try! realmService?.saveObject(object: object)
+    func saveObject(uid: String, beer: BeerElement) {
         print("saved")
+        firebaseService?.postBeerData(uid: uid, beer: beer) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.beerVCDelegate?.isDataSent()
+            case .failure(let failure):
+                self?.beerVCDelegate?.getError(error: failure)
+            }
+        }
     }
 }
 

@@ -70,7 +70,7 @@ class EnterNumViewController: UIViewController {
                                red: 0.88,
                                green: 0.868,
                                blue: 0.962,
-                               alpha: 0.9)
+                               alpha: 1)
     }
     
     private func setUpSubviews() {

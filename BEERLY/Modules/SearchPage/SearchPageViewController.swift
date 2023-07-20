@@ -1,20 +1,25 @@
 //
-//  MainPageViewController.swift
+//  SearchPageViewController.swift
 //  BEERLY
 //
-//  Created by Zhansuluu Kydyrova on 10/7/23.
+//  Created by Zhansuluu Kydyrova on 17/7/23.
 //
 
 import UIKit
 import SnapKit
 
-class MainPageViewController: UIViewController {
+class SearchPageViewController: UIViewController {
     
-    var mainPagePresentorDelegate: MainPagePresenterDelegate?
+    var presentorDelegate: SearchPagePresenterDelegate?
     
     private var beerList = [BeerElement]()
-    private var currentPage = 1
-    private let totalPage = 13
+    private let search: UISearchBar = {
+        let search = UISearchBar()
+        search.searchTextField.placeholder = "Search Menu"
+        search.searchTextField.textAlignment = .center
+        search.searchTextField.font = .systemFont(ofSize: 17, weight: .thin)
+        return search
+    }()
     
     private lazy var headerLabel: UILabel = {
         var label = UILabel()
@@ -33,18 +38,12 @@ class MainPageViewController: UIViewController {
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
-        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(
-            BeerCollectionViewCell.self,
-            forCellWithReuseIdentifier: BeerCollectionViewCell.reuseIdentifier
+            FilteredBeerCollectionViewCell.self,
+            forCellWithReuseIdentifier: FilteredBeerCollectionViewCell.reuseIdentifier
         )
-        collectionView.register(
-            LoadingCollectionViewCell.self,
-            forCellWithReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier
-        )
-
         return collectionView
     }()
     
@@ -67,7 +66,7 @@ class MainPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainPagePresentorDelegate?.getBeerList(page: currentPage)
+        search.delegate = self
     }
     
     override func loadView() {
@@ -76,8 +75,7 @@ class MainPageViewController: UIViewController {
     }
 }
 
-extension MainPageViewController {
-    
+extension SearchPageViewController {
     private func setUpUI() {
         setUpSubviews()
         setUpConstraints()
@@ -87,6 +85,7 @@ extension MainPageViewController {
     
     private func setUpSubviews() {
         view.addSubview(headerLabel)
+        view.addSubview(search)
         view.addSubview(menuCollectionView)
     }
     
@@ -99,7 +98,14 @@ extension MainPageViewController {
             maker.top.equalToSuperview().offset(80)
             maker.centerX.equalToSuperview()
         }
-       
+        
+        search.snp.makeConstraints { maker in
+            maker.top.equalTo(headerLabel.snp.bottom).offset(20)
+            maker.left.equalToSuperview().offset(20)
+            maker.right.equalToSuperview().offset(-20)
+            maker.height.equalTo(40)
+        }
+        
         menuCollectionView.snp.makeConstraints { maker in
             maker.top.equalTo(headerLabel.snp.bottom).offset(50)
             maker.leading.trailing.equalToSuperview()
@@ -108,9 +114,9 @@ extension MainPageViewController {
     }
 }
 
-extension MainPageViewController: MainPageControllerDelegate {
-    func recieveBeer(beers: [BeerElement]) {
-        beerList += beers
+extension SearchPageViewController: SearchPageControllerDelegate {
+    func recieveFilteredBeers(beers: [BeerElement]) {
+        beerList = beers
         DispatchQueue.main.async {
             self.menuCollectionView.reloadData()
         }
@@ -121,42 +127,38 @@ extension MainPageViewController: MainPageControllerDelegate {
     }
 }
 
-extension MainPageViewController: UICollectionViewDataSource {
+extension SearchPageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         beerList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if currentPage < totalPage && indexPath.row == beerList.count - 1 {
-            guard let cell = collectionView.dequeueReusableCell( withReuseIdentifier: LoadingCollectionViewCell.reuseIdentifier, for: indexPath
-            ) as? LoadingCollectionViewCell else { fatalError() }
-            cell.loadingIndicator.startAnimating()
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell( withReuseIdentifier: BeerCollectionViewCell.reuseIdentifier, for: indexPath
-            ) as? BeerCollectionViewCell else { fatalError() }
-            guard !beerList.isEmpty else { fatalError() }
-            let beer = beerList[indexPath.row]
-            cell.displayInfo(product: beer)
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if currentPage < totalPage && indexPath.row == beerList.count - 1 {
-            currentPage += 1
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                self.mainPagePresentorDelegate?.getBeerList(page: self.currentPage)
-            }
-        }
+        guard let cell = collectionView.dequeueReusableCell( withReuseIdentifier: FilteredBeerCollectionViewCell.reuseIdentifier, for: indexPath
+        ) as? FilteredBeerCollectionViewCell else { fatalError() }
+        let beer = beerList[indexPath.row]
+        cell.displayInfo(product: beer)
+        return cell
     }
 }
 
-extension MainPageViewController: UICollectionViewDelegate {
+extension SearchPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let beerInfoVC = BeerInfoPageConfigurator.build(beer: beerList[indexPath.row])
         present(beerInfoVC, animated: true)
     }
 }
 
+extension SearchPageViewController: UISearchBarDelegate {
+    func searchBar(
+        _ searchBar: UISearchBar,
+        textDidChange searchText: String
+    ) {
+        if searchText == "" {
+            beerList.removeAll()
+            menuCollectionView.reloadData()
+        } else {
+            presentorDelegate?.getFilteredBeerList(search: searchText)
+        }
+    }
+}
 

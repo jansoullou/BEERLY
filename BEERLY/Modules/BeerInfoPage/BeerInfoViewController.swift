@@ -11,6 +11,8 @@ import Kingfisher
 
 class BeerInfoViewController: UIViewController {
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     private var beer: BeerElement?
     
     var beerPresentorDelegate: BeerInfoPresentorDelegate?
@@ -118,12 +120,12 @@ class BeerInfoViewController: UIViewController {
 }
 
 extension BeerInfoViewController {
-    
     @objc
     private func addToBasket() {
         guard let beer = beer else { return }
-        buttonTouched(object: beer)
-        present(alert, animated: true, completion: nil)
+        print("tapp")
+//        buttonTouched(object: beer)
+        beerPresentorDelegate?.saveObject(uid: appDelegate.currentUser?.uid ?? "", beer: beer)
     }
     
     private func setUpUI() {
@@ -212,14 +214,16 @@ extension BeerInfoViewController {
         taglineLabel.text = beer.tagline?.uppercased()
         contributorLabel.text = beer.contributedBy?.uppercased()
         brewersTipsLabel.text = beer.brewersTips
-        productImage.kf.setImage(with: URL(string: beer.imageURL ?? ""))
+        productImage.kf.setImage(with: URL(string: beer.imageURL ?? "https://images.punkapi.com/v2/keg.png"))
     }
 }
 
 extension BeerInfoViewController: BeerInfoVCDelegate {
-    func buttonTouched(object: BeerElement) {
-        let model = object.toBeerElementDTO()
-        self.beerPresentorDelegate?.addBeerToTheBasket(object: model)
+    func isDataSent() {
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func getError(error: Error) {
+        print(error.localizedDescription)
     }
 }
-
